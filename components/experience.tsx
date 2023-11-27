@@ -37,7 +37,7 @@ export default function Experience() {
       <SectionHeading>My Experience</SectionHeading>
       <Timeline position="alternate" className="w-[90vw]">
         {experiencesData.map((item, index) => (
-          <TimelineItem>
+          <TimelineItem key={index}>
             <TimelineOppositeContent
               sx={{ m: "auto 0" }}
               align="right"
