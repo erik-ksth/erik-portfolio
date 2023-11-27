@@ -50,7 +50,7 @@ export default function Experience() {
 
             <TimelineSeparator>
               <TimelineConnector className="bg-gray-950 dark:bg-gray-300" />
-              <TimelineDot className="w-6 h-6 m-1 bg-blue-400 shadow-none" />
+              <TimelineDot className="w-6 h-6 m-1 shadow-none" style={{ backgroundColor: '#60a5fa !important' }} />
               <TimelineConnector className="bg-gray-950 dark:bg-gray-300" />
             </TimelineSeparator>
 
