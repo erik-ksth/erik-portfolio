@@ -49,9 +49,9 @@ export default function Experience() {
             </TimelineOppositeContent>
 
             <TimelineSeparator>
-              <TimelineConnector className="!bg-gray-950 dark:!bg-gray-300" />
+              <TimelineConnector className="!bg-gray-400 dark:!bg-gray-300" />
               <TimelineDot className="!w-6 !h-6 !m-1 !bg-blue-400 !shadow-none" />
-              <TimelineConnector className="!bg-gray-950 dark:!bg-gray-300" />
+              <TimelineConnector className="!bg-gray-400 dark:!bg-gray-300" />
             </TimelineSeparator>
 
             <TimelineContent className="!my-10">
