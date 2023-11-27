@@ -35,7 +35,7 @@ export default function Experience() {
       }}
     >
       <SectionHeading>My Experience</SectionHeading>
-      <Timeline position="alternate" className="w-[100vw]">
+      <Timeline position="alternate" className="!w-[100vw]">
         {experiencesData.map((item, index) => (
           <TimelineItem key={index}>
             <TimelineOppositeContent
@@ -43,19 +43,19 @@ export default function Experience() {
               align="right"
               variant="body2"
               color="text.secondary"
-              className="dark:text-gray-300"
+              className="dark:!text-gray-300"
             >
               {item.date}
             </TimelineOppositeContent>
 
             <TimelineSeparator>
-              <TimelineConnector className="bg-gray-950 dark:bg-gray-300" />
-              <TimelineDot className="w-6 h-6 m-1 shadow-none" style={{ backgroundColor: '#60a5fa !important' }} />
-              <TimelineConnector className="bg-gray-950 dark:bg-gray-300" />
+              <TimelineConnector className="!bg-gray-950 dark:!bg-gray-300" />
+              <TimelineDot className="!w-6 !h-6 !m-1 !bg-blue-400 !shadow-none" />
+              <TimelineConnector className="!bg-gray-950 dark:!bg-gray-300" />
             </TimelineSeparator>
 
-            <TimelineContent className="my-10">
-              <h1 className="text-blue-400 text-xl">{item.title}</h1>
+            <TimelineContent className="!my-10">
+              <h1 className="!text-blue-400 !text-xl">{item.title}</h1>
             </TimelineContent>
           </TimelineItem>
         ))}
