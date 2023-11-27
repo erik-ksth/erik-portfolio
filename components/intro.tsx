@@ -27,7 +27,7 @@ export default function Intro() {
             }}
           >
             <Image
-              src="https://marketplace.canva.com/EAE6OH6DF2w/1/0/1600w/canva-moon-astronaut-character-twitch-profile-picture-0kkgyJSodt4.jpg"
+              src="/myphoto.jpg"
               alt="Erik portrait"
               width="192"
               height="192"
@@ -58,11 +58,10 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hello, I&apos;m Erik.</span> I&apos;m a{" "}
-        <span className="font-bold">full-stack developer</span> with{" "}
-        <span className="font-bold">8 years</span> of experience. I enjoy
-        building <span className="italic">sites & apps</span>. My focus is{" "}
-        <span className="underline">React (Next.js)</span>.
+        <span className="font-bold">Hello, I&apos;m Erik.</span><br/> 
+        <span className="font-bold text-lg italic">A Computer Science Student,</span><br/>
+        <span className="font-bold text-lg italic">a Front-end Developer</span><br/>
+        <span className="font-bold text-lg italic">and a UI/UX Designer.</span>
       </motion.h1>
 
       <motion.div

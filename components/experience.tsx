@@ -55,7 +55,8 @@ export default function Experience() {
             </TimelineSeparator>
 
             <TimelineContent className="!my-10">
-              <h1 className="!text-blue-400 !text-xl">{item.title}</h1>
+              <h1 className="!text-blue-400">{item.title}</h1>
+              <p className="!text-sm !text-gray-500 dark:!text-gray-300">{item.location}</p>
             </TimelineContent>
           </TimelineItem>
         ))}

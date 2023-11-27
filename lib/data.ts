@@ -35,28 +35,19 @@ export const links = [
 
 export const experiencesData = [
   {
-    title: "Graduated bootcamp",
-    location: "Miami, FL",
-    description:
-      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
-    icon: React.createElement(LuGraduationCap),
-    date: "2019",
+    title: "Front-End Developer & UI/UX Designer",
+    location: "Bridge Burma",
+    date: "2023 - present",
   },
   {
-    title: "Front-End Developer",
-    location: "Orlando, FL",
-    description:
-      "I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.",
-    icon: React.createElement(CgWorkAlt),
-    date: "2019 - 2021",
+    title: "Associate's Degree in Computer Science",
+    location: "De Anza College",
+    date: "2023",
   },
   {
-    title: "Full-Stack Developer",
-    location: "Houston, TX",
-    description:
-      "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
-    icon: React.createElement(FaReact),
-    date: "2021 - present",
+    title: "Co-Founder and Project Leader",
+    location: "Robotics Society of De Anza",
+    date: "2022",
   },
 ] as const;
 
@@ -64,47 +55,52 @@ export const projectsData = [
   {
     title: "Study Buddy",
     description:
-      "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
-    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
+      "A web app to boost productivity. It includes Pomodoro Timer, To-Do-List, Different kinds of ambient sounds and musics and Inspriational quotes by famouse people",
+    tags: ["HTML", "CSS", "JavaScript", "JQuery"],
     imageUrl: studybuddyImg,
     link: "https://study-buddy.vercel.app/"
   },
   {
     title: "Enstant",
     description:
-      "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
-    tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
+      "A responsive website for business card ordering service by Oakmead Printing Inc.",
+    tags: ["React", "Tailwind", "Material UI", "Email.JS"],
     imageUrl: enstantImg,
     link: "https://enstant.vercel.app/"
   },
   {
     title: "Snap Client",
     description:
-      "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
-    tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
+      "A responsive website for a medical software company, SnapClient. Used plugins for creating the components (Contact form, map, etc.) and tracking user engagement.",
+    tags: ["WordPress", "Site 5"],
     imageUrl: snapClientImg,
     link: "https://snapclient.com/"
   },
 ] as const;
 
 export const skillsData = [
-  "HTML",
-  "CSS",
+  "C++",
+  "Java",
+  "Python",
   "JavaScript",
   "TypeScript",
+  "Prisma",
+  "HTML",
+  "CSS",
+  "Bootstrap",
   "React",
   "Next.js",
   "Node.js",
   "Git",
+  "Arduino",
   "Tailwind",
-  "Prisma",
   "MongoDB",
-  "Redux",
-  "GraphQL",
-  "Apollo",
-  "Express",
-  "PostgreSQL",
-  "Python",
-  "Django",
+  "Firebase",
+  "Google AI Cloud",
+  "Wordpress",
   "Framer Motion",
+  "Adobe Photoshop",
+  "Adobe Illustrator",
+  "Adobe XD",
+  "Figma",
 ] as const;

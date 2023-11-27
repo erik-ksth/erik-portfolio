@@ -19,29 +19,15 @@ export default function About() {
     >
       <SectionHeading>About me</SectionHeading>
       <p className="mb-3">
-        After graduating with a degree in{" "}
-        <span className="font-medium">Accounting</span>, I decided to pursue my
-        passion for programming. I enrolled in a coding bootcamp and learned{" "}
-        <span className="font-medium">full-stack web development</span>.{" "}
-        <span className="italic">My favorite part of programming</span> is the
-        problem-solving aspect. I <span className="underline">love</span> the
-        feeling of finally figuring out a solution to a problem. My core stack
-        is{" "}
-        <span className="font-medium">
-          React, Next.js, Node.js, and MongoDB
-        </span>
-        . I am also familiar with TypeScript and Prisma. I am always looking to
-        learn new technologies. I am currently looking for a{" "}
-        <span className="font-medium">full-time position</span> as a software
-        developer.
+        I am currently a undergraduated Computer Science student at{" "}
+        <i>San Jose State University</i>. I finished{" "}
+        <b>Associate's Degree for Transfer</b> at <i>De Anza College</i> in 2023
+        August.
       </p>
       <p className="mb-3">
-        <span className="italic">When I&apos;m not coding</span>, I enjoy playing
-        video games, watching movies, and playing with my dog. I also enjoy{" "}
-        <span className="font-medium">learning new things</span>. I am currently
-        learning about{" "}
-        <span className="font-medium">history and philosophy</span>. I&apos;m also
-        learning how to play the guitar.
+        I have over <b>2-year</b> experience in <i>Programming</i>, and over{" "}
+        <b>6-year</b> experience in <i>Graphic Design</i>. My top skills include{" "}
+        <b>HTML, CSS, JavaScript, React, Figma, Java</b> and <b>Arduino.</b>
       </p>
     </motion.section>
   );
