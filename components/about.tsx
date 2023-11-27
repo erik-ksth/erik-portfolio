@@ -21,7 +21,7 @@ export default function About() {
       <p className="mb-3">
         I am currently a undergraduated Computer Science student at{" "}
         <i>San Jose State University</i>. I finished{" "}
-        <b>Associate's Degree for Transfer</b> at <i>De Anza College</i> in 2023
+        <b>Associate&apos;s Degree for Transfer</b> at <i>De Anza College</i> in 2023
         August.
       </p>
       <p className="mb-3">
