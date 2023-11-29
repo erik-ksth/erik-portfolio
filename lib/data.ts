@@ -1,8 +1,5 @@
-import React from "react";
-import { CgWorkAlt } from "react-icons/cg";
-import { FaReact } from "react-icons/fa";
-import { LuGraduationCap } from "react-icons/lu";
 import studybuddyImg from "@/public/studybuddy.png";
+import recipeGeniusImg from "@/public/recipeGenius.png";
 import snapClientImg from "@/public/snapClient.png";
 import enstantImg from "@/public/enstant.png";
 
@@ -59,6 +56,14 @@ export const projectsData = [
     tags: ["HTML", "CSS", "JavaScript", "JQuery"],
     imageUrl: studybuddyImg,
     link: "https://study-buddy.vercel.app/"
+  },
+  {
+    title: "Recipe Genius",
+    description:
+      "An application that generate possible dishes and recipes depending on the ingredients in the fridge. A project for Object Oriented Design class at SJSU.",
+    tags: ["JAVA", "JavaFX", "API", "OOP"],
+    imageUrl: recipeGeniusImg,
+    link: "https://github.com/erik-ksth/CS151-RecipeGenius"
   },
   {
     title: "Enstant",
