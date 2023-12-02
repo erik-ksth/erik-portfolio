@@ -9,6 +9,8 @@ import React from "react";
 import { BsArrowRight, BsLinkedin } from "react-icons/bs";
 import { FaGithubSquare } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
+import { FaBehanceSquare } from "react-icons/fa";
+import { TypeAnimation } from 'react-type-animation';
 
 export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
@@ -27,41 +29,39 @@ export default function Intro() {
             }}
           >
             <Image
-              src="/myphoto.jpg"
+              src="/erik-memoji.png"
               alt="Erik portrait"
               width="192"
               height="192"
               quality="95"
               priority={true}
-              className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
+              className="mb-5"
+              // className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
             />
           </motion.div>
 
-          <motion.span
-            className="absolute bottom-0 right-0 text-4xl"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: "spring",
-              stiffness: 125,
-              delay: 0.1,
-              duration: 0.7,
-            }}
-          >
-            👋
-          </motion.span>
         </div>
       </div>
 
       <motion.h1
-        className="mb-10 mt-4 text-2xl font-medium !leading-[1.5] sm:text-4xl"
+        className="mb-10 mt-4 text-2xl font-medium !leading-[2] sm:text-4xl"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hello, I&apos;m Erik.</span><br/> 
-        <span className="font-bold text-lg italic">A Computer Science Student,</span><br/>
-        <span className="font-bold text-lg italic">a Front-end Developer</span><br/>
-        <span className="font-bold text-lg italic">and a UI/UX Designer.</span>
+        <span className="font-bold">Hello, I&apos;m (Erik) Kaung Sithu Hein.</span><br/> 
+        <TypeAnimation
+        sequence={[
+          "A Computer Science Student @ SJSU",
+          1000,
+          "A Front-end Developer",
+          1000,
+          "A UI/UX Designer",
+          1000,
+        ]}
+        speed={50}
+        repeat={Infinity}
+        className="font-semiBold text-2xl"
+      />
       </motion.h1>
 
       <motion.div
@@ -104,6 +104,13 @@ export default function Intro() {
           target="_blank"
         >
           <FaGithubSquare />
+        </a>
+        <a
+          className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+          href="https://www.behance.net/kaungsithu32"
+          target="_blank"
+        >
+          <FaBehanceSquare />
         </a>
       </motion.div>
     </section>
