@@ -32,9 +32,19 @@ export const links = [
 
 export const experiencesData = [
   {
+    title: "Bachelor's Degree in Computer Science",
+    location: "San José State University",
+    date: "2023 - 2025",
+  },
+  {
     title: "Front-End Developer & UI/UX Designer",
     location: "Bridge Burma",
     date: "2023 - present",
+  },
+  {
+    title: "Web Development Intern",
+    location: "Oakmead Printing Inc.",
+    date: "2023",
   },
   {
     title: "Associate's Degree in Computer Science",
@@ -101,6 +111,7 @@ export const skillsData = [
   "Git",
   "Arduino",
   "Tailwind",
+  "MySQL",
   "MongoDB",
   "Firebase",
   "Google AI Cloud",
