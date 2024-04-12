@@ -32,6 +32,11 @@ export const links = [
 
 export const experiencesData = [
   {
+    title: "Student Ambassador",
+    location: "Adobe",
+    date: "2024 - present",
+  },
+  {
     title: "Bachelor's Degree in Computer Science",
     location: "San José State University",
     date: "2023 - 2025",

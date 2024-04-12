@@ -10,6 +10,7 @@ import { BsArrowRight, BsLinkedin } from "react-icons/bs";
 import { FaGithubSquare } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
 import { FaBehanceSquare } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
 import { TypeAnimation } from 'react-type-animation';
 
 export default function Intro() {
@@ -48,7 +49,7 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hello, I&apos;m (Erik) Kaung Sithu Hein.</span><br/> 
+        <span className="font-bold">Hello, I&apos;m Kaung Sithu (Erik) Hein.</span><br/> 
         <TypeAnimation
         sequence={[
           "A Computer Science Student @ SJSU",
@@ -104,6 +105,13 @@ export default function Intro() {
           target="_blank"
         >
           <FaGithubSquare />
+        </a>
+        <a
+          className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+          href="www.youtube.com/@flowwitherik"
+          target="_blank"
+        >
+          <FaYoutube />
         </a>
         <a
           className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
