@@ -92,34 +92,36 @@ export default function Intro() {
           View Resume{" "}
           <HiDownload className="opacity-60 group-hover:translate-y-1 transition" />
         </a>
-        <a
-          className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
-          href="https://www.linkedin.com/in/kaungsithuhein/"
-          target="_blank"
-        >
-          <BsLinkedin />
-        </a>
-        <a
-          className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
-          href="https://github.com/erik-ksth"
-          target="_blank"
-        >
-          <FaGithubSquare />
-        </a>
-        <a
-          className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
-          href="www.youtube.com/@flowwitherik"
-          target="_blank"
-        >
-          <FaYoutube />
-        </a>
-        <a
-          className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
-          href="https://www.behance.net/kaungsithu32"
-          target="_blank"
-        >
-          <FaBehanceSquare />
-        </a>
+        <div className="flex gap-x-2">
+          <a
+            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            href="https://www.linkedin.com/in/kaungsithuhein/"
+            target="_blank"
+          >
+            <BsLinkedin />
+          </a>
+          <a
+            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            href="https://github.com/erik-ksth"
+            target="_blank"
+          >
+            <FaGithubSquare />
+          </a>
+          <a
+            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            href="www.youtube.com/@flowwitherik"
+            target="_blank"
+          >
+            <FaYoutube />
+          </a>
+          <a
+            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            href="https://www.behance.net/kaungsithu32"
+            target="_blank"
+          >
+            <FaBehanceSquare />
+          </a>
+        </div>
       </motion.div>
     </section>
   );
