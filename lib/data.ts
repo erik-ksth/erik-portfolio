@@ -33,6 +33,11 @@ export const links = [
 
 export const experiencesData = [
   {
+    title: "Software Development Engineer Intern",
+    location: "Graph Academy",
+    date: "2024 - present",
+  },
+  {
     title: "Student Ambassador",
     location: "Adobe",
     date: "2024 - present",
@@ -40,7 +45,7 @@ export const experiencesData = [
   {
     title: "Bachelor's Degree in Computer Science",
     location: "San José State University",
-    date: "2023 - 2025",
+    date: "2023 - present",
   },
   {
     title: "Front-End Developer & UI/UX Designer",
@@ -56,6 +61,11 @@ export const experiencesData = [
     title: "Associate's Degree in Computer Science",
     location: "De Anza College",
     date: "2023",
+  },
+  {
+    title: "Head of Marketing",
+    location: "De Anza International Students Connection",
+    date: "2022",
   },
   {
     title: "Co-Founder and Project Leader",

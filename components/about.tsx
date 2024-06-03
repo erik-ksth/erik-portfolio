@@ -20,7 +20,7 @@ export default function About() {
       <SectionHeading>About me</SectionHeading>
       <p className="mb-3">
         I am currently a undergraduate Computer Science student at{" "}
-        <i>San Jose State University</i>. I finished{" "}
+        <i>San José State University</i>. I finished{" "}
         <b>Associate&apos;s Degree for Transfer</b> at <i>De Anza College</i> in 2023
         August.
       </p>
