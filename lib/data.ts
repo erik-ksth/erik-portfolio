@@ -3,6 +3,7 @@ import recipeGeniusImg from "@/public/recipeGenius.png";
 import snapClientImg from "@/public/snapClient.png";
 import enstantImg from "@/public/enstant.png";
 import typeInZenImg from "@/public/typeInZen.png";
+import aiSchedulerImg from "@/public/aiScheduler.png";
 
 export const links = [
   {
@@ -86,10 +87,18 @@ export const projectsData = [
   {
     title: "Study Buddy",
     description:
-      "A web app to boost productivity. It includes Pomodoro Timer, To-Do-List, Different kinds of ambient sounds and musics and Inspriational quotes by famouse people",
+    "A web app to boost productivity. It includes Pomodoro Timer, To-Do-List, Different kinds of ambient sounds and musics and Inspriational quotes by famouse people",
     tags: ["HTML", "CSS", "JavaScript", "JQuery"],
     imageUrl: studybuddyImg,
     link: "https://study-buddy.vercel.app/"
+  },
+  {
+    title: "AI Scheduler",
+    description:
+      "A scheduling app that genereate a productive schedule for the user based on their input and the availability of the user.",
+    tags: ["React", "Generative AI", "Next JS", "Typescript"],
+    imageUrl: aiSchedulerImg,
+    link: "https://scheduleyourday.vercel.app/"
   },
   {
     title: "Recipe Genius",
