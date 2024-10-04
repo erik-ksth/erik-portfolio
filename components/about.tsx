@@ -20,13 +20,13 @@ export default function About() {
       <SectionHeading>About me</SectionHeading>
       <p className="mb-3">
         I am currently a undergraduate Computer Science student at{" "}
-        <i>San José State University</i>. I finished{" "}
+        <i>San José State University</i> graduating in <b>2025</b>. I finished{" "}
         <b>Associate&apos;s Degree for Transfer</b> at <i>De Anza College</i> in 2023
         August.
       </p>
       <p className="mb-3">
-        I have over <b>2-year</b> experience in <i>Programming</i>, and over{" "}
-        <b>6-year</b> experience in <i>Graphic Design</i>. My top skills include{" "}
+        I have over <b>4-year</b> experience in <i>Programming</i>, and over{" "}
+        <b>8-year</b> experience in <i>Graphic Design</i>. My top skills include{" "}
         <b>HTML, CSS, JavaScript, React, Figma, Java</b> and <b>Arduino.</b>
       </p>
     </motion.section>
