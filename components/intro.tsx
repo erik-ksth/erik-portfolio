@@ -16,7 +16,7 @@ import { TypeAnimation } from 'react-type-animation';
 export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
-  
+
   return (
     <section ref={ref} id="home" className="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]">
       <div className="flex items-center justify-center">
@@ -37,7 +37,7 @@ export default function Intro() {
               quality="95"
               priority={true}
               className="mb-5"
-              // className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
+            // className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
             />
           </motion.div>
 
@@ -49,20 +49,20 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hello, I&apos;m Kaung Sithu (Erik) Hein.</span><br/> 
+        <span className="font-bold">Hello, I&apos;m Kaung Sithu (Erik) Hein.</span><br />
         <TypeAnimation
-        sequence={[
-          "A Computer Science Student @ SJSU",
-          1000,
-          "A Front-end Developer",
-          1000,
-          "A UI/UX Designer",
-          1000,
-        ]}
-        speed={50}
-        repeat={Infinity}
-        className="font-semiBold text-2xl"
-      />
+          sequence={[
+            "A Computer Science Student @ SJSU",
+            1000,
+            "A Front-end Developer",
+            1000,
+            "A UI/UX Designer",
+            1000,
+          ]}
+          speed={50}
+          repeat={Infinity}
+          className="font-semiBold text-2xl"
+        />
       </motion.h1>
 
       <motion.div
@@ -86,7 +86,7 @@ export default function Intro() {
         </Link>
         <a
           className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-110 hover:scale-110 active:scale-105 transition borderBlack dark:bg-white/10"
-          href="/resume.pdf"
+          href="/Erik_Hein_resume.pdf"
           target="_blank"
         >
           View Resume{" "}
