@@ -4,6 +4,7 @@ import snapClientImg from "@/public/snapClient.png";
 import enstantImg from "@/public/enstant.png";
 import typeInZenImg from "@/public/typeInZen.png";
 import zenBoardImg from "@/public/zenBoard.png";
+import aroundUImg from "@/public/aroundU.png";
 
 export const links = [
   {
@@ -81,6 +82,14 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData = [
+  {
+    title: "Around U: Local Event Finder",
+    description:
+      "A local event discvoery app that hleps users find nearby events and activities. Users can browse, save and register for events.",
+    tags: ["Java", "Android Studio", "Kotlin", "Google Maps API"],
+    imageUrl: aroundUImg,
+    link: "https://github.com/erik-ksth/cs175eventfinder",
+  },
   {
     title: "Zen Board: AI Scheduler",
     description:
