@@ -5,6 +5,7 @@ import enstantImg from "@/public/enstant.png";
 import typeInZenImg from "@/public/typeInZen.png";
 import zenBoardImg from "@/public/zenBoard.png";
 import aroundUImg from "@/public/aroundU.png";
+import sjsnapImg from "@/public/sjsnap.png";
 
 export const links = [
   {
@@ -45,11 +46,6 @@ export const experiencesData = [
     date: "May 2024 - Sep 2024",
   },
   {
-    title: "Student Ambassador",
-    location: "Adobe",
-    date: "Apr 2024 - present",
-  },
-  {
     title: "Bachelor's Degree in Computer Science",
     location: "San José State University",
     date: "2023 - 2025",
@@ -82,6 +78,21 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData = [
+  {
+    title: "SJ Snap: AI-Powered Civic Engagment Web App",
+    description:
+      "A hackathon project that is an AI-driven web app designed to simplify and accelerate the process of reporting San Jose City-related issues through the existing 311 system.",
+    tags: [
+      "Project Management",
+      "Generative AI",
+      "Next JS",
+      "Typescript",
+      "Google AI Cloud",
+      "Supabase",
+    ],
+    imageUrl: sjsnapImg,
+    link: "https://sjsnap.vercel.app/",
+  },
   {
     title: "Around U: Local Event Finder",
     description:
@@ -146,11 +157,13 @@ export const skillsData = [
   "Python",
   "JavaScript",
   "TypeScript",
+  "Dart",
   "Prisma",
   "HTML",
   "CSS",
   "Bootstrap",
   "React",
+  "React Native",
   "Next.js",
   "Node.js",
   "Flutter",

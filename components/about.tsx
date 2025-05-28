@@ -19,15 +19,16 @@ export default function About() {
     >
       <SectionHeading>About me</SectionHeading>
       <p className="mb-3">
-        I am currently a undergraduate Computer Science student at{" "}
-        <i>San José State University</i> graduating in <b>2025</b>. I finished{" "}
-        <b>Associate&apos;s Degree for Transfer</b> at <i>De Anza College</i> in 2023
-        August.
+        I am a Computer Science graduate from{" "}
+        <i>San José State University</i>. I am currently working as a Full-Stack Developer
+        and Software Engineer, specializing in web and mobile development with a strong focus on UI/UX design.
       </p>
       <p className="mb-3">
-        I have over <b>4-year</b> experience in <i>Programming</i>, and over{" "}
-        <b>8-year</b> experience in <i>Graphic Design</i>. My top skills include{" "}
-        <b>HTML, CSS, JavaScript, React, Figma, Java</b> and <b>Arduino.</b>
+        I have over <b>5 years</b> of experience in <i>Software Development</i>, and over{" "}
+        <b>10 years</b> of experience in <i>Graphic Design</i>. My expertise includes{" "}
+        <b>React, Next.js, React Native, TypeScript</b>, and modern web technologies.
+        I combine technical expertise with UI/UX design principles to create intuitive,
+        responsive, and visually appealing applications that deliver exceptional user experiences.
       </p>
     </motion.section>
   );

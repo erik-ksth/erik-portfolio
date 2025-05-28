@@ -52,11 +52,13 @@ export default function Intro() {
         <span className="font-bold">Hello, I&apos;m Kaung Sithu (Erik) Hein.</span><br />
         <TypeAnimation
           sequence={[
-            "A Computer Science Student @ SJSU",
+            "A Full-Stack Developer & Software Engineer",
             1000,
-            "A Front-end Developer",
+            "Specialized in Web & Mobile Development",
             1000,
-            "A UI/UX Designer",
+            "Expert in React, Next.js & React Native",
+            1000,
+            "A Passionate UI/UX Designer",
             1000,
           ]}
           speed={50}
