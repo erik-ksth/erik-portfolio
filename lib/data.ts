@@ -5,7 +5,7 @@ import enstantImg from "@/public/enstant.png";
 import typeInZenImg from "@/public/typeInZen.png";
 import zenBoardImg from "@/public/zenBoard.png";
 import aroundUImg from "@/public/aroundU.png";
-import sjsnapImg from "@/public/sjsnap.png";
+import sjsnapImg from "@/public/sjSnap.png";
 
 export const links = [
   {
@@ -53,7 +53,7 @@ export const experiencesData = [
   {
     title: "Front-End Developer & UI/UX Designer",
     location: "Bridge Burma",
-    date: "Aug 2023 - Dec 2024",
+    date: "Aug 2023 - Nov 2024",
   },
   {
     title: "Web Development Intern",
