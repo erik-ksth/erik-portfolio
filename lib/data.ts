@@ -53,7 +53,7 @@ export const experiencesData = [
   {
     title: "Front-End Developer & UI/UX Designer",
     location: "Bridge Burma",
-    date: "Aug 2023 - present",
+    date: "Aug 2023 - Dec 2024",
   },
   {
     title: "Web Development Intern",
