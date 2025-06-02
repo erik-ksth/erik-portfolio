@@ -81,17 +81,10 @@ export const projectsData = [
   {
     title: "SJ Snap: AI-Powered Civic Engagment Web App",
     description:
-      "A hackathon project that is an AI-driven web app designed to simplify and accelerate the process of reporting San Jose City-related issues through the existing 311 system.",
-    tags: [
-      "Project Management",
-      "Generative AI",
-      "Next JS",
-      "Typescript",
-      "Google AI Cloud",
-      "Supabase",
-    ],
+      "AI-driven web app for reporting San Jose City issues through the 311 system.",
+    tags: ["Project Management", "Gen AI", "Next JS", "Supabase"],
     imageUrl: sjsnapImg,
-    link: "https://sjsnap.vercel.app/",
+    link: "https://sjsnap.vercel.app/about",
   },
   {
     title: "Around U: Local Event Finder",

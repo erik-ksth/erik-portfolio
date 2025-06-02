@@ -30,7 +30,7 @@ export default function Intro() {
             }}
           >
             <Image
-              src="/Professional Portrait.jpg"
+              src="/Erik.jpg"
               alt="Erik portrait"
               width="192"
               height="192"
@@ -96,7 +96,7 @@ export default function Intro() {
         <div className="flex gap-x-2">
           <a
             className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
-            href="https://www.linkedin.com/in/kaungsithuhein/"
+            href="https://www.linkedin.com/in/erikhein/"
             target="_blank"
           >
             <BsLinkedin />
