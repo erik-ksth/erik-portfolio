@@ -110,7 +110,7 @@ export default function Intro() {
           </a>
           <a
             className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
-            href="https://www.youtube.com/@flowwitherik"
+            href="https://www.youtube.com/@erik-hein"
             target="_blank"
           >
             <FaYoutube />
