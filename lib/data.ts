@@ -6,6 +6,8 @@ import typeInZenImg from "@/public/typeInZen.png";
 import zenBoardImg from "@/public/zenBoard.png";
 import aroundUImg from "@/public/aroundU.png";
 import sjsnapImg from "@/public/sjSnap.png";
+import trekteriaImg from "@/public/trekteria.png";
+import getaImg from "@/public/gita.png";
 
 export const links = [
   {
@@ -79,12 +81,28 @@ export const experiencesData = [
 
 export const projectsData = [
   {
+    title: "Trekteri: AI-Powered Camping Planner",
+    description:
+      "AI-powered camping planner that generates personalized itineraries, campsite recommendations, and outdoor activities based on user preferences and location.",
+    tags: ["ReactNative", "Expo", "Supabase"],
+    imageUrl: trekteriaImg,
+    link: "https://trekteria.com/",
+  },
+  {
+    title: "Gita: Video-to-Music Generator",
+    description:
+      "A video-to-music generator that generates music based on the video's content using AI.",
+    tags: ["React", "Python", "FastAPI", "Google ADK", "Lyria AI", "Groq"],
+    imageUrl: getaImg,
+    link: "https://devpost.com/software/gita-ai-powered-video-to-music-generation-platform",
+  },
+  {
     title: "SJ Snap: AI-Powered Civic Engagment Web App",
     description:
       "AI-driven web app for reporting San Jose City issues through the 311 system.",
     tags: ["Project Management", "Gen AI", "Next JS", "Supabase"],
     imageUrl: sjsnapImg,
-    link: "https://sjsnap.vercel.app/about",
+    link: "https://devpost.com/software/sj-snap",
   },
   {
     title: "Around U: Local Event Finder",
@@ -166,6 +184,9 @@ export const skillsData = [
   "Arduino",
   "Tailwind",
   "MySQL",
+  "PostgreSQL",
+  "Supabase",
+  "SQLite",
   "MongoDB",
   "Firebase",
   "Google AI Cloud",
@@ -175,4 +196,9 @@ export const skillsData = [
   "Adobe Illustrator",
   "Adobe XD",
   "Figma",
+  "Expo",
+  "FastAPI",
+  "Lyria AI",
+  "Groq",
+  "Google ADK",
 ] as const;
