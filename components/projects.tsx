@@ -8,15 +8,18 @@ import { useSectionInView } from "@/lib/hook";
 
 export default function Projects() {
   const { ref } = useSectionInView("Projects", 0.5);
-  
+
   return (
-    <section ref={ref} id="projects" className="scroll-mt-40 mb-40">
-      <SectionHeading>My Projects</SectionHeading>
-      <div>
+    <section ref={ref} id="projects" className="scroll-mt-20">
+      <SectionHeading>Featured Projects</SectionHeading>
+      <p className="text-gray-600 dark:text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+        Here are some of my recent projects that showcase my skills in full-stack development,
+        mobile apps, and AI integration.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projectsData.map((project, index) => (
-          <React.Fragment key={index}>
-            <Project {...project} />
-          </React.Fragment>
+          <Project key={index} {...project} />
         ))}
       </div>
     </section>

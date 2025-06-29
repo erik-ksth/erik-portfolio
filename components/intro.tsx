@@ -18,112 +18,141 @@ export default function Intro() {
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
   return (
-    <section ref={ref} id="home" className="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]">
-      <div className="flex items-center justify-center">
-        <div className="relative">
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: "tween",
-              duration: 0.2,
-            }}
-          >
+    <section
+      ref={ref}
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        {/* Profile Image */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-12"
+        >
+          <div className="relative inline-block">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-xl opacity-30"></div>
             <Image
               src="/Erik.jpg"
               alt="Erik portrait"
-              width="192"
-              height="192"
+              width="200"
+              height="200"
               quality="95"
               priority={true}
-              className="h-48 w-48 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
+              className="relative h-48 w-48 rounded-full object-cover border-4 border-white shadow-2xl"
             />
-          </motion.div>
+          </div>
+        </motion.div>
 
-        </div>
-      </div>
-
-      <motion.h1
-        className="mb-10 mt-4 text-2xl font-medium !leading-[2] sm:text-4xl"
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        <span className="font-bold">Hello, I&apos;m Kaung Sithu (Erik) Hein.</span><br />
-        <TypeAnimation
-          sequence={[
-            "A Full-Stack Developer & Software Engineer",
-            1000,
-            "Specialized in Web & Mobile Development",
-            1000,
-            "Expert in React, Next.js & React Native",
-            1000,
-            "A Passionate UI/UX Designer",
-            1000,
-          ]}
-          speed={50}
-          repeat={Infinity}
-          className="font-semiBold text-2xl"
-        />
-      </motion.h1>
-
-      <motion.div
-        className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.1,
-        }}
-      >
-        <Link
-          href="#contact"
-          className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
-          onClick={() => {
-            setActiveSection("Contact");
-            setTimeOfLastClick(Date.now());
-          }}
+        {/* Main Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-8"
         >
-          Contact me here{" "}
-          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
-        </Link>
-        <a
-          className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-110 hover:scale-110 active:scale-105 transition borderBlack dark:bg-white/10"
-          href="/Erik Hein Resume.pdf"
-          target="_blank"
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            Erik Hein
+          </h1>
+          <div className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-4">
+            <TypeAnimation
+              sequence={[
+                "Full-Stack Developer",
+                2000,
+                "Software Engineer",
+                2000,
+                "UI/UX Designer",
+                2000,
+                "Mobile Developer",
+                2000,
+              ]}
+              speed={50}
+              repeat={Infinity}
+              className="font-medium"
+            />
+          </div>
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+            CS Student at SJSU passionate about creating innovative digital experiences
+          </p>
+        </motion.div>
+
+        {/* Action Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
-          View Resume{" "}
-          <HiDownload className="opacity-60 group-hover:translate-y-1 transition" />
-        </a>
-        <div className="flex gap-x-2">
+          <Link
+            href="#contact"
+            className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105"
+            onClick={() => {
+              setActiveSection("Contact");
+              setTimeOfLastClick(Date.now());
+            }}
+          >
+            Get In Touch
+            <BsArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
+          </Link>
+
           <a
-            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            className="group bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-8 py-4 rounded-full font-medium border-2 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 transform hover:scale-105"
+            href="/Erik Hein Resume.pdf"
+            target="_blank"
+          >
+            View Resume
+            <HiDownload className="inline ml-2 group-hover:translate-y-1 transition-transform" />
+          </a>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex justify-center gap-4"
+        >
+          <a
+            className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             href="https://www.linkedin.com/in/erikhein/"
             target="_blank"
+            aria-label="LinkedIn"
           >
-            <BsLinkedin />
+            <BsLinkedin size={24} />
           </a>
           <a
-            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             href="https://github.com/erik-ksth"
             target="_blank"
+            aria-label="GitHub"
           >
-            <FaGithubSquare />
+            <FaGithubSquare size={24} />
           </a>
           <a
-            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400"
             href="https://www.youtube.com/@erik-hein"
             target="_blank"
+            aria-label="YouTube"
           >
-            <FaYoutube />
+            <FaYoutube size={24} />
           </a>
           <a
-            className="bg-white text-gray-700 p-4 flex items-center gap-2 rounded-full cursor-pointer outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition borderBlack dark:text-black"
+            className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
             href="https://www.behance.net/kaungsithu32"
             target="_blank"
+            aria-label="Behance"
           >
-            <FaBehanceSquare />
+            <FaBehanceSquare size={24} />
           </a>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

@@ -25,18 +25,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body
-        className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
+        className={`${inter.className} bg-white text-gray-900 relative dark:bg-gray-950 dark:text-gray-100 antialiased`}
       >
-        <div
-          className={
-            "!bg-[#fbe2e3] !absolute !top-[-6rem] !-z-20 !right-[11rem] !h-[31.25rem] !w-[31.25rem] !rounded-full !blur-[10rem] sm:!w-[68.75rem] dark:!bg-[#946263]"
-          }
-        ></div>
-        <div
-          className={
-            "!bg-[#dbd7fb] !absolute !top-[-1rem] !-z-10 !left-[-35rem] !h-[31.25rem] !w-[50rem] !rounded-full !blur-[10rem] sm:!w-[68.75rem] md:!left-[-33rem] lg:!left-[-28rem] xl:!left-[-15rem] 2xl:!left-[-5rem] dark:!bg-[#676394]"
-          }
-        ></div>
+        {/* Subtle gradient background */}
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"></div>
+          <div className="absolute top-0 left-1/2 w-[800px] h-[600px] bg-gradient-radial from-blue-100/20 to-transparent dark:from-blue-900/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/2 w-[600px] h-[400px] bg-gradient-radial from-purple-100/20 to-transparent dark:from-purple-900/10 rounded-full blur-3xl"></div>
+        </div>
 
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
