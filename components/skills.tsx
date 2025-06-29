@@ -9,9 +9,9 @@ import { motion } from "framer-motion";
 // Organize skills into categories
 const skillCategories = {
   "Programming Languages": ["C++", "Java", "Python", "JavaScript", "TypeScript", "Dart"],
-  "Frontend": ["HTML", "CSS", "React", "Next.js", "Tailwind", "Bootstrap", "Framer Motion"],
+  "Frontend": ["HTML", "CSS", "React", "React Native", "Next.js", "Tailwind", "Bootstrap", "Framer Motion"],
   "Backend & Database": ["Node.js", "FastAPI", "Prisma", "MySQL", "PostgreSQL", "Supabase", "SQLite", "MongoDB", "Firebase"],
-  "Mobile & Tools": ["React Native", "Flutter", "Expo", "Git", "Arduino"],
+  "Mobile & Tools": ["Flutter", "Expo", "Git", "Arduino"],
   "Design & AI": ["Adobe Photoshop", "Adobe Illustrator", "Adobe XD", "Figma", "Google AI Cloud", "API"],
   "Other": ["JavaFX", "Wordpress"]
 };

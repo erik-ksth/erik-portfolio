@@ -72,7 +72,7 @@ export default function About() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-xl opacity-20"></div>
               <Image
-                src="/aboutMe.jpg"
+                src="/Erik.jpg"
                 alt="Erik working"
                 width="400"
                 height="400"
