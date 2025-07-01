@@ -81,7 +81,7 @@ export const experiencesData = [
 
 export const projectsData = [
   {
-    title: "Trekteri: AI-Powered Camping Planner",
+    title: "Trekteria: AI-Powered Camping Planner",
     description:
       "AI-powered camping planner that generates personalized itineraries based on user preferences and location.",
     tags: ["React Native", "Expo", "Supabase", "Mobile App"],
