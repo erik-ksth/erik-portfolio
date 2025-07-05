@@ -68,7 +68,7 @@ export const experiencesData = [
     date: "Jun 2023",
   },
   {
-    title: "Head of Marketing",
+    title: "Vice President",
     location: "De Anza International Students Connection",
     date: "Mar 2022 - May 2023",
   },
