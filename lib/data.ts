@@ -8,6 +8,7 @@ import aroundUImg from "@/public/aroundU.png";
 import sjsnapImg from "@/public/sjSnap.png";
 import trekteriaImg from "@/public/trekteria.png";
 import getaImg from "@/public/gita.png";
+import ytCommerizerImg from "@/public/ytCommerizer.png";
 
 export const links = [
   {
@@ -87,6 +88,21 @@ export const projectsData = [
     tags: ["React Native", "Expo", "Supabase", "Mobile App"],
     imageUrl: trekteriaImg,
     link: "https://trekteria.com/",
+  },
+  {
+    title: "YT Commerizer",
+    description:
+      "A browser extension that analyzes YouTube videos and provides a sentiment analysis and summary of the video.",
+    tags: [
+      "Chrome Extension",
+      "Node.js",
+      "React",
+      "Vite",
+      "Generative AI",
+      "GCP",
+    ],
+    imageUrl: ytCommerizerImg,
+    link: "https://chromewebstore.google.com/detail/ejbelaeciihalcbaikocbheoefhikicb?utm_source=item-share-cb",
   },
   {
     title: "Gita: Video-to-Music Generator",
