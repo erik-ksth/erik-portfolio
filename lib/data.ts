@@ -9,6 +9,7 @@ import sjsnapImg from "@/public/sjSnap.png";
 import trekteriaImg from "@/public/trekteria.png";
 import getaImg from "@/public/gita.png";
 import ytCommerizerImg from "@/public/ytCommerizer.png";
+import jadeAIImg from "@/public/jadeAi.png";
 
 export const links = [
   {
@@ -81,6 +82,14 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData = [
+  {
+    title: "JadeAI: Cursor for Data Analysis",
+    description:
+      "Best use of Groq prize winner at CalHacks 12.0 - An AI-powered conversational data analyst that lets users clean, analyze, and visualize datasets using natural language commands.",
+    tags: ["Next.JS", "Python", "Fast API", "Pandas"],
+    imageUrl: jadeAIImg,
+    link: "https://devpost.com/software/jadeai",
+  },
   {
     title: "Trekteria: AI-Powered Camping Planner",
     description:

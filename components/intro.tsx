@@ -79,7 +79,7 @@ export default function Intro() {
             />
           </div>
           <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            CS Student at SJSU passionate about creating innovative digital experiences
+            Computer Science Graduate passionate about creating innovative digital experiences
           </p>
         </motion.div>
 
