@@ -7,28 +7,35 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      backgroundImage: {},
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+      },
+      colors: {
+        black: "#1a1a1a", // Overriding default black to dark gray
       },
       animation: {
-        "fade-in": "fadeIn 0.8s ease-out",
-        "slide-up": "slideUp 0.6s ease-out",
-        "scale-in": "scaleIn 0.5s ease-out",
+        marquee: "marquee 300s linear infinite",
+        marquee2: "marquee2 300s linear infinite",
+        "marquee-reverse": "marquee-reverse 300s linear infinite",
+        "marquee-reverse2": "marquee-reverse2 300s linear infinite",
       },
       keyframes: {
-        fadeIn: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
         },
-        slideUp: {
-          "0%": { transform: "translateY(50px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
         },
-        scaleIn: {
-          "0%": { transform: "scale(0.8)", opacity: "0" },
-          "100%": { transform: "scale(1)", opacity: "1" },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        "marquee-reverse2": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
     },

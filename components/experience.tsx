@@ -5,7 +5,6 @@ import SectionHeading from "./section-heading";
 import { experiencesData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hook";
 import { motion } from "framer-motion";
-import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
 
 export default function Experience() {
   const { ref } = useSectionInView("Experience");
@@ -14,52 +13,37 @@ export default function Experience() {
     <section
       ref={ref}
       id="experience"
-      className="scroll-mt-20"
+      className="scroll-mt-20 py-20 w-full"
     >
       <SectionHeading>Experience & Education</SectionHeading>
 
-      <div className="max-w-4xl mx-auto">
-        <div className="space-y-8">
+      <div className="w-full max-w-7xl mx-auto px-4 mt-10">
+        {/* Ledger Header */}
+        <div className="hidden md:grid grid-cols-12 border-b-4 border-black dark:border-white pb-4">
+          <div className="col-span-5 text-2xl font-black uppercase tracking-tighter">What</div>
+          <div className="col-span-4 text-2xl font-black uppercase tracking-tighter">Where</div>
+          <div className="col-span-3 text-2xl font-black uppercase tracking-tighter text-right">When</div>
+        </div>
+
+        {/* Ledger Rows */}
+        <div className="flex flex-col">
           {experiencesData.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="relative"
+              className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-0 border-b-4 border-black dark:border-white py-8 md:py-6 items-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-200 group cursor-default"
             >
-              {/* Timeline line */}
-              {index < experiencesData.length - 1 && (
-                <div className="absolute left-6 top-16 w-0.5 h-8 bg-gray-300 dark:bg-gray-600"></div>
-              )}
-
-              <div className="flex gap-6">
-                {/* Icon */}
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                    {item.title.includes("Degree") || item.title.includes("Bachelor") || item.title.includes("Associate") ? (
-                      <FaGraduationCap className="text-blue-600 dark:text-blue-400" size={20} />
-                    ) : (
-                      <FaBriefcase className="text-blue-600 dark:text-blue-400" size={20} />
-                    )}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                      {item.title}
-                    </h3>
-                    <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-                      {item.date}
-                    </span>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {item.location}
-                  </p>
-                </div>
+              <div className="col-span-5 text-2xl md:text-3xl font-bold uppercase tracking-tight px-2">
+                {item.title}
+              </div>
+              <div className="col-span-4 text-xl md:text-2xl font-medium px-2">
+                {item.location}
+              </div>
+              <div className="col-span-3 text-lg md:text-xl font-mono font-bold md:text-right px-2">
+                {item.date}
               </div>
             </motion.div>
           ))}

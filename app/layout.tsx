@@ -25,14 +25,10 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body
-        className={`${inter.className} bg-white text-gray-900 relative dark:bg-gray-950 dark:text-gray-100 antialiased`}
+        className={`${inter.className} bg-white text-black dark:bg-black dark:text-white antialiased`}
       >
-        {/* Subtle gradient background */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"></div>
-          <div className="absolute top-0 left-1/2 w-[800px] h-[600px] bg-gradient-radial from-blue-100/20 to-transparent dark:from-blue-900/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/2 w-[600px] h-[400px] bg-gradient-radial from-purple-100/20 to-transparent dark:from-purple-900/10 rounded-full blur-3xl"></div>
-        </div>
+        {/* Flat background - no gradients */}
+        <div className="fixed inset-0 -z-10 bg-white dark:bg-black"></div>
 
         <ThemeContextProvider>
           <ActiveSectionContextProvider>

@@ -2,64 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
-html.dark {
-  --line-color: rgba(255, 255, 255, 0.2);
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --border-color: #1a1a1a;
 }
 
-html {
-  --line-color: rgba(0, 0, 0, 0.1);
+.dark {
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --border-color: #ffffff;
 }
 
-.borderBlack {
-  @apply border border-black/10;
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Custom scrollbar */
+/* Remove all rounded corners globally */
+* {
+  border-radius: 0 !important;
+}
+
+/* Custom scrollbar - thick and blocky */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--background);
+  border-left: 2px solid var(--border-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  background: var(--foreground);
+  border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--border-color);
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Smooth transitions */
-* {
-  transition: color 0.2s ease, background-color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-/* Custom gradient utilities */
-.bg-gradient-radial {
-  background: radial-gradient(circle, var(--tw-gradient-stops));
-}
-
-/* Glass morphism effect */
+/* Flat Glass - actually just solid with border now */
 .glass {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--background);
+  border: 2px solid var(--border-color);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-.dark .glass {
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Utilities for the new design */
+.border-thick {
+  border: 2px solid var(--border-color);
+}
+
+.border-thick-b {
+  border-bottom: 2px solid var(--border-color);
+}
+
+.btn-flat {
+  background: var(--foreground);
+  color: var(--background);
+  border: 2px solid var(--foreground);
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.btn-flat:hover {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.btn-flat-outline {
+  background: transparent;
+  color: var(--foreground);
+  border: 2px solid var(--foreground);
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.btn-flat-outline:hover {
+  background: var(--foreground);
+  color: var(--background);
 }

@@ -20,100 +20,55 @@ export default function Project({
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="group"
+      className="group mb-12 last:mb-0"
     >
-      <motion.div
-        className="flex flex-col lg:flex-row gap-8 p-8 rounded-2xl bg-gradient-to-br from-gray-50/50 to-white/50 dark:from-gray-800/50 dark:to-gray-900/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-500 hover:shadow-xl hover:shadow-gray-200/50 dark:hover:shadow-gray-900/50"
-        whileHover={{
-          scale: 1.02,
-          transition: { duration: 0.3 }
-        }}
-      >
+      <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b-2 border-black dark:border-white last:border-none">
 
         {/* Project Image */}
-        <motion.div
-          className="relative w-full lg:w-80 h-56 lg:h-48 rounded-xl overflow-hidden flex-shrink-0"
-          whileHover={{
-            scale: 1.05,
-            transition: { duration: 0.4 }
-          }}
-        >
+        <div className="relative w-full lg:w-96 h-64 lg:h-auto border-4 border-black dark:border-white overflow-hidden flex-shrink-0">
           <Image
             src={imageUrl}
             alt={title}
             fill
-            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            className="object-cover transition-all duration-500"
           />
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          />
-        </motion.div>
+        </div>
 
         {/* Project Content */}
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex-1 flex flex-col justify-between py-2">
           <div>
-            <motion.div
-              className="flex items-start justify-between mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white pr-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+            <div className="flex items-start justify-between mb-6">
+              <h3 className="text-3xl font-black text-black dark:text-white uppercase tracking-tight">
                 {title}
               </h3>
               <a
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 p-3 rounded-full bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 shadow-lg hover:scale-110"
+                className="flex-shrink-0 p-3 bg-black dark:bg-white text-white dark:text-black hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white border-2 border-black dark:border-white transition-all duration-200"
               >
-                <FaExternalLinkAlt size={16} />
+                <FaExternalLinkAlt size={20} />
               </a>
-            </motion.div>
+            </div>
 
-            <motion.p
-              className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
+            <p className="text-black dark:text-white text-lg font-medium leading-relaxed mb-8">
               {description}
-            </motion.p>
+            </p>
           </div>
 
           {/* Tags */}
-          <motion.div
-            className="flex flex-wrap gap-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
+          <div className="flex flex-wrap gap-3">
             {tags.map((tag, index) => (
-              <motion.span
+              <span
                 key={index}
-                className="px-3 py-1.5 text-xs font-medium bg-white/60 dark:bg-gray-800/60 text-gray-700 dark:text-gray-300 rounded-full border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-200 cursor-default"
-                whileHover={{
-                  scale: 1.05,
-                  y: -2,
-                  transition: { duration: 0.2 }
-                }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                viewport={{ once: true }}
+                className="px-4 py-2 text-sm font-bold bg-white dark:bg-black text-black dark:text-white border-2 border-black dark:border-white uppercase tracking-wider"
               >
                 {tag}
-              </motion.span>
+              </span>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

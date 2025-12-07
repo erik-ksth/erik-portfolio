@@ -227,3 +227,30 @@ export const skillsData = [
   "Groq",
   "Google ADK",
 ] as const;
+
+export const skillsDataCategorized = [
+  {
+    category: "Languages",
+    skills: ["C++", "Java", "Python", "JavaScript", "TypeScript", "Dart", "HTML", "CSS"],
+  },
+  {
+    category: "Frontend",
+    skills: ["React", "React Native", "Next.js", "Tailwind", "Bootstrap", "Framer Motion", "Expo", "JavaFX", "Flutter"],
+  },
+  {
+    category: "Backend",
+    skills: ["Node.js", "FastAPI", "Prisma", "API"],
+  },
+  {
+    category: "Database",
+    skills: ["MySQL", "PostgreSQL", "Supabase", "SQLite", "MongoDB", "Firebase"],
+  },
+  {
+    category: "Tools & AI",
+    skills: ["Git", "Arduino", "Google AI Cloud", "Lyria AI", "Groq", "Google ADK", "Wordpress"],
+  },
+  {
+    category: "Design",
+    skills: ["Adobe Photoshop", "Adobe Illustrator", "Adobe XD", "Figma"],
+  },
+] as const;

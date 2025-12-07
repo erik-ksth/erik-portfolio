@@ -9,7 +9,7 @@ export default function SectionHeading({
 }) {
   return (
     <motion.h2
-      className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white"
+      className="text-4xl font-black text-center mb-12 text-black dark:text-white uppercase tracking-widest border-b-4 border-black dark:border-white inline-block pb-2"
       initial={{
         opacity: 0,
         y: 100,

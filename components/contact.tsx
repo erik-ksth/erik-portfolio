@@ -7,7 +7,8 @@ import { useSectionInView } from "@/lib/hook";
 import { sendEmail } from "@/actions/sendEmail";
 import SubmitBtn from "./submit-btn";
 import toast from "react-hot-toast";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { BsLinkedin } from "react-icons/bs";
+import { FaGithubSquare, FaBehanceSquare, FaYoutube } from "react-icons/fa";
 
 export default function Contact() {
   const { ref } = useSectionInView("Contact");
@@ -16,77 +17,54 @@ export default function Contact() {
     <section
       ref={ref}
       id="contact"
-      className="scroll-mt-20"
+      className="scroll-mt-20 py-20 w-full min-h-[80vh] flex flex-col justify-center"
     >
       <SectionHeading>Get In Touch</SectionHeading>
 
-      <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Let&apos;s work together
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                I&apos;m always open to discussing new opportunities, interesting projects,
-                or just having a chat about technology and innovation.
-              </p>
+      <div className="w-full max-w-5xl mx-auto px-4 mt-10 md:mt-20 font-mono">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="border-4 border-black dark:border-white bg-white dark:bg-black overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+        >
+          {/* Terminal Header */}
+          <div className="bg-black dark:bg-white text-white dark:text-black p-4 flex items-center justify-between border-b-4 border-black dark:border-white">
+            <div className="flex gap-4">
+              <div className="w-4 h-4 rounded-full bg-white dark:bg-black border-2 border-transparent"></div>
+              <div className="w-4 h-4 rounded-full bg-white dark:bg-black border-2 border-transparent opacity-50"></div>
+              <div className="w-4 h-4 rounded-full bg-white dark:bg-black border-2 border-transparent opacity-50"></div>
+            </div>
+            <div className="font-bold uppercase tracking-widest">contact_protocol.exe</div>
+            <div className="w-16"></div> {/* Spacer for centering */}
+          </div>
+
+          {/* Terminal Body */}
+          <div className="p-8 md:p-12 text-black dark:text-white">
+            {/* System Variables */}
+            <div className="mb-12 space-y-2 opacity-70">
+              <p>{`> INITIALIZING CONNECTION...`}</p>
+              <p>{`> TARGET: ERIK HEIN`}</p>
+              <p>{`> LOADING SYSTEM VARIABLES...`}</p>
+              <div className="pl-4 border-l-2 border-black dark:border-white mt-4 space-y-1">
+                <p>{`const EMAIL = "erikhein.ksth@gmail.com";`}</p>
+                <p>{`const LOCATION = "San Jose, CA";`}</p>
+                <div className="flex flex-wrap gap-1">
+                  <span>const SOCIALS = [</span>
+                  <a href="https://www.linkedin.com/in/erikhein/" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"LinkedIn"</a>,
+                  <a href="https://github.com/erik-ksth" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"GitHub"</a>,
+                  <a href="https://www.youtube.com/@erik-hein" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"YouTube"</a>,
+                  <a href="https://www.behance.net/kaungsithu32" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"Behance"</a>
+                  <span>];</span>
+                </div>
+              </div>
+              <p className="mt-4">{`> READY FOR INPUT.`}</p>
             </div>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                  <FaEnvelope className="text-blue-600 dark:text-blue-400" size={20} />
-                </div>
-                <div>
-                  <p className="font-medium text-gray-900 dark:text-white">Email</p>
-                  <a
-                    href="mailto:erikhein.ksth@gmail.com"
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
-                  >
-                    erikhein.ksth@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                  <FaMapMarkerAlt className="text-blue-600 dark:text-blue-400" size={20} />
-                </div>
-                <div>
-                  <p className="font-medium text-gray-900 dark:text-white">Location</p>
-                  <p className="text-gray-600 dark:text-gray-400">San Jose, CA</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                  <FaPhone className="text-blue-600 dark:text-blue-400" size={20} />
-                </div>
-                <div>
-                  <p className="font-medium text-gray-900 dark:text-white">Availability</p>
-                  <p className="text-gray-600 dark:text-gray-400">Open to opportunities</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
+            {/* Form */}
             <form
-              className="space-y-6"
+              className="space-y-8"
               action={async (formData) => {
                 const { data, error } = await sendEmail(formData);
 
@@ -98,39 +76,47 @@ export default function Contact() {
                 toast.success('Email sent successfully!');
               }}
             >
-              <div>
-                <label htmlFor="senderEmail" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email
+              <div className="space-y-2">
+                <label htmlFor="senderEmail" className="block font-bold uppercase">
+                  {`> ENTER SENDER EMAIL:`}
                 </label>
-                <input
-                  id="senderEmail"
-                  className="w-full h-12 rounded-lg border border-gray-300 dark:border-gray-600 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-all duration-300"
-                  name="senderEmail"
-                  type="email"
-                  placeholder="your.email@example.com"
-                  required
-                  maxLength={500}
-                />
+                <div className="flex items-center gap-2">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold">$</span>
+                  <input
+                    id="senderEmail"
+                    className="w-full bg-transparent border-b-2 border-black dark:border-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 py-2 font-bold placeholder:text-gray-400/50"
+                    name="senderEmail"
+                    type="email"
+                    placeholder="user@example.com"
+                    required
+                    maxLength={500}
+                  />
+                </div>
               </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Message
+              <div className="space-y-2">
+                <label htmlFor="message" className="block font-bold uppercase">
+                  {`> ENTER MESSAGE:`}
                 </label>
-                <textarea
-                  id="message"
-                  className="w-full h-32 rounded-lg border border-gray-300 dark:border-gray-600 p-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white resize-none transition-all duration-300"
-                  name="message"
-                  placeholder="Tell me about your project..."
-                  required
-                  maxLength={5000}
-                />
+                <div className="flex items-start gap-2">
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mt-2">$</span>
+                  <textarea
+                    id="message"
+                    className="w-full bg-transparent border-b-2 border-black dark:border-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 py-2 font-bold placeholder:text-gray-400/50 resize-none h-32"
+                    name="message"
+                    placeholder="Write your message here..."
+                    required
+                    maxLength={5000}
+                  />
+                </div>
               </div>
 
-              <SubmitBtn />
+              <div className="pt-8">
+                <SubmitBtn />
+              </div>
             </form>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
