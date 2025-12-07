@@ -49,7 +49,7 @@ export default function Contact() {
               <p>{`> LOADING SYSTEM VARIABLES...`}</p>
               <div className="pl-4 border-l-2 border-black dark:border-white mt-4 space-y-1">
                 <p>{`const EMAIL = "erikhein.ksth@gmail.com";`}</p>
-                <p>{`const LOCATION = "San Jose, CA";`}</p>
+                <p>{`const LOCATION = "San Francisco, CA";`}</p>
                 <div className="flex flex-wrap gap-1">
                   <span>const SOCIALS = [</span>
                   <a href="https://www.linkedin.com/in/erikhein/" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;LinkedIn&quot;</a>,
