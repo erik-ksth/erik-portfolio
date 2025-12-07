@@ -52,10 +52,10 @@ export default function Contact() {
                 <p>{`const LOCATION = "San Jose, CA";`}</p>
                 <div className="flex flex-wrap gap-1">
                   <span>const SOCIALS = [</span>
-                  <a href="https://www.linkedin.com/in/erikhein/" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"LinkedIn"</a>,
-                  <a href="https://github.com/erik-ksth" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"GitHub"</a>,
-                  <a href="https://www.youtube.com/@erik-hein" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"YouTube"</a>,
-                  <a href="https://www.behance.net/kaungsithu32" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">"Behance"</a>
+                  <a href="https://www.linkedin.com/in/erikhein/" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;LinkedIn&quot;</a>,
+                  <a href="https://github.com/erik-ksth" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;GitHub&quot;</a>,
+                  <a href="https://www.youtube.com/@erik-hein" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;YouTube&quot;</a>,
+                  <a href="https://www.behance.net/kaungsithu32" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;Behance&quot;</a>
                   <span>];</span>
                 </div>
               </div>
