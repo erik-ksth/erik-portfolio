@@ -20,6 +20,12 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+@media (min-width: 768px) {
+  body {
+    cursor: none;
+  }
+}
+
 /* Remove all rounded corners globally */
 * {
   border-radius: 0 !important;

@@ -24,7 +24,7 @@ export default function Header() {
     <header className="z-[999] relative">
       {/* Flat background - full width with border */}
       <div
-        className="fixed top-0 left-0 right-0 h-20 bg-white dark:bg-black border-b-2 border-black dark:border-white"
+        className="fixed top-0 left-0 right-0 h-20 bg-white dark:bg-black border-b-4 border-black dark:border-white"
       />
 
       {/* Desktop Navigation */}
@@ -54,13 +54,13 @@ export default function Header() {
       </nav>
 
       {/* Mobile Burger Menu Button */}
-      <div className="md:hidden fixed top-4 right-4 z-50">
+      <div className="md:hidden fixed top-3 right-4 z-50">
         <button
           onClick={toggleMenu}
-          className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+          className="w-14 h-14 bg-white dark:bg-black border-4 border-black dark:border-white flex items-center justify-center text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-300"
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </div>
 
@@ -73,34 +73,34 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/80 z-40"
               onClick={closeMenu}
             />
 
             {/* Menu Content */}
             <motion.div
-              initial={{ opacity: 0, y: -50, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -50, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed top-20 right-4 left-4 sm:left-auto sm:w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50 overflow-hidden"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="fixed top-0 right-0 h-screen w-[80%] max-w-sm bg-white dark:bg-black border-l-4 border-black dark:border-white z-50 flex flex-col pt-24 px-6"
             >
-              <nav className="p-4">
-                <ul className="space-y-2">
+              <nav className="flex-1">
+                <ul className="space-y-4">
                   {links.map((link, index) => (
                     <motion.li
                       key={link.hash}
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                     >
                       <Link
                         className={clsx(
-                          "block px-4 py-3 rounded-lg transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/20",
+                          "block w-full px-6 py-4 text-2xl font-black uppercase tracking-widest border-4 border-black dark:border-white transition-all duration-300",
                           {
-                            "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400": activeSection === link.name,
-                            "text-gray-700 dark:text-gray-300": activeSection !== link.name,
+                            "bg-black text-white dark:bg-white dark:text-black": activeSection === link.name,
+                            "bg-white text-black dark:bg-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black": activeSection !== link.name,
                           }
                         )}
                         href={link.hash}
@@ -116,6 +116,10 @@ export default function Header() {
                   ))}
                 </ul>
               </nav>
+
+              <div className="pb-10 text-center text-sm font-bold uppercase tracking-widest opacity-50">
+                Menu
+              </div>
             </motion.div>
           </>
         )}

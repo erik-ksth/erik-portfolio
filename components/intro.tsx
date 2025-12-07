@@ -21,7 +21,7 @@ export default function Intro() {
     <section
       ref={ref}
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden py-20"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-28 pb-20 md:py-20"
     >
       <div className="max-w-6xl mx-auto px-4 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
 
