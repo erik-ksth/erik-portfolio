@@ -34,7 +34,7 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-0 border-b-4 border-black dark:border-white py-8 md:py-6 items-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-200 group cursor-default"
+              className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-0 border-b-4 border-black dark:border-white py-8 md:py-6 items-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-200 group"
             >
               <div className="col-span-5 text-2xl md:text-3xl font-bold uppercase tracking-tight px-2">
                 {item.title}

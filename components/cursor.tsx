@@ -40,7 +40,7 @@ export default function Cursor() {
 
      return (
           <motion.div
-               className="fixed top-0 left-0 w-5 h-5 rounded-full bg-black dark:bg-white pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+               className="fixed top-0 left-0 w-5 h-5 rounded-full bg-white pointer-events-none z-[9999] mix-blend-difference hidden md:block"
                style={{
                     x: cursorX,
                     y: cursorY,

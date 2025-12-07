@@ -31,6 +31,10 @@ body {
   border-radius: 0 !important;
 }
 
+a, button {
+  cursor: none;
+}
+
 /* Custom scrollbar - thick and blocky */
 ::-webkit-scrollbar {
   width: 12px;
