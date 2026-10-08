@@ -14,9 +14,9 @@ const sans = Manrope({ subsets: ["latin"], variable: "--font-sans" });
 const mono = Space_Mono({ subsets: ["latin"], variable: "--font-mono", weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "Erik Hein — Engineer × Designer",
+  title: "Erik Hein — Product Engineer",
   description:
-    "Erik Hein is a software engineer and designer in San Francisco crafting AI products and interfaces with care.",
+    "Erik Hein is a product engineer in San Francisco building AI products and creative, interactive interfaces.",
 };
 
 export const viewport: Viewport = {

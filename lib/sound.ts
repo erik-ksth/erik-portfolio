@@ -23,7 +23,8 @@ export type KeyTone = "white" | "black" | "signal" | "graphite";
 const MUSIC_KEY = "erik-music";
 
 // Sound effects are always on. The header toggle controls only the lofi music,
-// which starts off and is remembered per visitor.
+// which is on by default and remembered per visitor. Browsers keep everything
+// silent until the visitor's first click or key press, then it all starts.
 
 // ---------- music on/off state (shared with React) ----------
 
@@ -47,9 +48,9 @@ export function useMusicOn() {
 
 export function getMusicPref(): boolean {
   try {
-    return localStorage.getItem(MUSIC_KEY) === "on";
+    return localStorage.getItem(MUSIC_KEY) !== "off";
   } catch {
-    return false;
+    return true;
   }
 }
 
@@ -146,8 +147,22 @@ export function initAudio() {
     unlocked = true;
     if (g.ctx.state === "suspended" && !document.hidden) g.ctx.resume();
   };
-  window.addEventListener("pointerdown", unlock, { capture: true });
-  window.addEventListener("keydown", unlock, { capture: true });
+  // Browsers only let audio start inside a real gesture. On touch screens that
+  // is the finger lifting (pointerup/touchend), not pointerdown, so listen to all.
+  for (const type of ["pointerdown", "pointerup", "touchend", "click", "keydown"])
+    window.addEventListener(type, unlock, { capture: true });
+
+  // Some browsers allow sound straight away (Safari/Firefox when the visitor
+  // allows auto-play for the site, Chrome for sites they often play media on).
+  // Try now so those visitors hear it without clicking first.
+  const g = ensureGraph();
+  if (!g) return;
+  const track = () => {
+    if (g.ctx.state === "running") unlocked = true;
+  };
+  g.ctx.addEventListener("statechange", track);
+  track();
+  if (g.ctx.state === "suspended") g.ctx.resume().catch(() => {});
 }
 
 type MusicIntro = { delay: number; fade: number };

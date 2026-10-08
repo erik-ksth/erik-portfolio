@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Erik Hein monogram</title>
+  <desc id="desc">A geometric black E and H monogram on a signal-yellow square.</desc>
+  <rect width="128" height="128" rx="22" fill="#FFD60A"/>
+  <path
+    fill="#0A0A0A"
+    d="M14 22h48v15H32v19h26v16H32v19h30v15H14V22Zm54 0h18v34h16V22h18v84h-18V72H86v34H68V22Z"
+  />
+</svg>

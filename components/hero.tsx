@@ -37,9 +37,9 @@ export default function Hero() {
               play={ready}
               delay={0.5}
               lines={[
-                "I engineer software",
+                "I build products",
                 <>
-                  with a <span className="mark">designer&apos;s</span> soul.
+                  with a <span className="mark">creative</span> edge.
                 </>,
               ]}
             />
@@ -53,7 +53,7 @@ export default function Hero() {
           transition={{ duration: 1, ease, delay: 0.9 }}
         >
           <p className="max-w-[17rem] text-[0.95rem] leading-snug text-muted">
-            Software engineer at Iditor, designing and building products in San
+            Software engineer at Iditor, shipping products end to end in San
             Francisco.
           </p>
           <div className="pointer-events-auto flex gap-3">

@@ -1,83 +1,22 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { preloaderStore } from "@/lib/store";
 import { getMusicPref, play, playSoon, setMusicOn } from "@/lib/sound";
-
-const VISITED_KEY = "erik-visited";
-
-function hasVisited() {
-  try {
-    return localStorage.getItem(VISITED_KEY) === "1" || localStorage.getItem("erik-sound") !== null;
-  } catch {
-    return false;
-  }
-}
 import { useLenis } from "./smooth-scroll";
+import LiquidName, { type LoaderApi } from "./liquid-name";
 
-const DURATION = 2000;
-const COMMAND = "build erik-hein --mode=craft";
+const DURATION = 2400;
 // Never hold the visitor longer than this, even if fonts are slow.
 const MAX_WAIT = 4000;
 const ZOOM_SCALE = 120;
-const NAME = "Erik Hein";
-const FONT_SIZE = 150;
-const BASELINE = 178;
-
-// Find a point inside the left stem of the "H" (in screen space, relative to
-// the name's wrapper) so the zoom flies into solid yellow, not a gap. The glyph
-// is drawn offscreen with the same font and scanned for the stem's centre.
-function stemOrigin(text: SVGTextElement, wrap: HTMLElement) {
-  const family = getComputedStyle(document.documentElement)
-    .getPropertyValue("--font-display")
-    .trim();
-  const canvas = document.createElement("canvas");
-  canvas.width = 300;
-  canvas.height = 220;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true })!;
-  ctx.font = `800 ${FONT_SIZE}px ${family || "sans-serif"}`;
-  ctx.fillText("H", 20, 180);
-  // Below the crossbar, so the scan hits only the left stem.
-  const midCap = FONT_SIZE * 0.18;
-  const row = ctx.getImageData(
-    0,
-    Math.round(180 - midCap),
-    canvas.width,
-    1,
-  ).data;
-  let start = -1;
-  let end = -1;
-  for (let x = 0; x < canvas.width; x++) {
-    const solid = row[x * 4 + 3] > 128;
-    if (solid && start < 0) start = x;
-    else if (!solid && start >= 0) {
-      end = x;
-      break;
-    }
-  }
-  if (start < 0 || end < 0) throw new Error("stem not found");
-  const box = text.getExtentOfChar(NAME.indexOf("H"));
-  const point = new DOMPoint(
-    box.x + (start + end) / 2 - 20,
-    BASELINE - midCap,
-  ).matrixTransform(text.getScreenCTM()!);
-  const rect = wrap.getBoundingClientRect();
-  return `${point.x - rect.left}px ${point.y - rect.top}px`;
-}
 
 export default function Preloader() {
   const [visible, setVisible] = useState(true);
-  const [done, setDone] = useState(false);
   const [zoom, setZoom] = useState<{ origin: string } | null>(null);
-  // First-time visitors click "enter" (which also wakes up audio); returning ones skip it.
-  const [choosing, setChoosing] = useState(false);
-  const enterRef = useRef<() => void>(() => {});
   const nameRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<SVGTextElement>(null);
-  const typedRef = useRef<HTMLSpanElement>(null);
-  const fillRef = useRef<HTMLDivElement>(null);
-  const pctRef = useRef<HTMLSpanElement>(null);
+  const api = useRef<LoaderApi | null>(null);
   const lenis = useLenis();
   const revealRef = useRef<() => void>(() => {});
 
@@ -113,29 +52,23 @@ export default function Preloader() {
 
     // Fly into the name (or just reveal, for reduced motion).
     const enter = () => {
-      setChoosing(false);
-      try {
-        localStorage.setItem(VISITED_KEY, "1");
-      } catch {
-        // Private mode: they'll just see "enter" again next time.
-      }
-      // Music is opt-in from the header; if they turned it on before, let the
-      // landing breathe and then bring the lofi in very slowly.
+      // Music is on unless the visitor turned it off. It starts on their first
+      // click (browser rule), then eases in very slowly.
       if (getMusicPref()) setMusicOn(true, false, { delay: 2.5, fade: 14 });
       if (reduced) {
         reveal();
         return;
       }
-      let origin = "50% 60%";
+      let origin = "50% 50%";
       try {
-        if (textRef.current && nameRef.current) origin = stemOrigin(textRef.current, nameRef.current);
+        if (api.current && nameRef.current)
+          origin = api.current.origin(nameRef.current);
       } catch {
         // Fall back to the centre if the font can't be measured.
       }
       setZoom({ origin });
       playSoon("whoosh");
     };
-    enterRef.current = enter;
     let finished = false;
 
     // Writes straight to the DOM: no React re-render per frame.
@@ -146,24 +79,11 @@ export default function Preloader() {
       const eased = 1 - Math.pow(1 - t, 3);
       const p = ready || elapsed > MAX_WAIT ? eased : Math.min(eased, 0.92);
 
-      if (typedRef.current) {
-        typedRef.current.textContent = COMMAND.slice(
-          0,
-          Math.ceil(Math.min(p / 0.4, 1) * COMMAND.length),
-        );
-      }
-      if (fillRef.current) fillRef.current.style.transform = `scaleX(${p})`;
-      if (pctRef.current)
-        pctRef.current.textContent = String(Math.floor(p * 100)).padStart(
-          3,
-          " ",
-        );
+      api.current?.update(p);
 
       if (p >= 1) {
         finished = true;
-        setDone(true);
-        if (hasVisited()) setTimeout(enter, 450);
-        else setChoosing(true);
+        setTimeout(enter, 350);
       }
     };
     const frame = () => {
@@ -180,14 +100,9 @@ export default function Preloader() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!choosing) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Enter") enterRef.current();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [choosing]);
+  const register = useCallback((a: LoaderApi) => {
+    api.current = a;
+  }, []);
 
   return (
     <AnimatePresence>
@@ -205,7 +120,7 @@ export default function Preloader() {
           }}
         >
           <div className="flex flex-1 flex-col items-center justify-center px-6">
-            {/* The name is stroked in like a pen signature (CSS keyframes), then we fly into it. */}
+            {/* The name fills with yellow as it loads, then we fly into the "H". */}
             <motion.div
               ref={nameRef}
               className="relative w-[min(92vw,900px)] will-change-transform"
@@ -214,81 +129,9 @@ export default function Preloader() {
               transition={{ duration: 1, ease: [0.7, 0, 0.84, 0] }}
               onAnimationComplete={() => zoom && revealRef.current()}
             >
-              <svg
-                viewBox="0 0 1000 240"
-                className="w-full overflow-visible"
-                aria-label="Erik Hein"
-              >
-                <text
-                  ref={textRef}
-                  className="signature-draw"
-                  x="500"
-                  y="178"
-                  textAnchor="middle"
-                  fontFamily="var(--font-display)"
-                  fontWeight="800"
-                  fontSize="150"
-                  stroke="var(--signal)"
-                  strokeWidth="1.4"
-                  fill="var(--signal)"
-                >
-                  {NAME}
-                </text>
-              </svg>
-            </motion.div>
-
-            <motion.div
-              className="mt-10 w-[min(92vw,30rem)] font-mono text-[0.78rem] leading-relaxed text-paper/70"
-              animate={{ opacity: zoom ? 0 : 1 }}
-              transition={{ duration: 0.25 }}
-            >
-              <p>
-                <span className="text-signal">~ $</span> <span ref={typedRef} />
-              </p>
-              <div className="mt-3 flex items-center gap-4">
-                <div className="relative h-[2px] flex-1 overflow-hidden rounded-full bg-paper/15">
-                  <div
-                    ref={fillRef}
-                    className="absolute inset-0 origin-left rounded-full bg-signal will-change-transform"
-                    style={{ transform: "scaleX(0)" }}
-                  />
-                </div>
-                <span className="w-10 whitespace-pre text-right tabular-nums">
-                  <span ref={pctRef}>{"  0"}</span>%
-                </span>
-              </div>
-              <div className="relative mt-4 h-11">
-                <p
-                  className={`absolute inset-x-0 top-0 transition-opacity duration-300 ${done && !choosing ? "opacity-100" : "opacity-0"}`}
-                >
-                  <span className="text-signal">✓</span> ready. welcome in.
-                </p>
-                <div
-                  className={`absolute inset-x-0 top-0 flex items-center gap-5 transition-opacity duration-500 ${choosing ? "opacity-100" : "pointer-events-none opacity-0"}`}
-                >
-                  <button
-                    data-sound="none"
-                    onClick={() => enterRef.current()}
-                    className="key key-signal"
-                    tabIndex={choosing ? 0 : -1}
-                  >
-                    enter
-                    <span className="kbd !bg-black/10 !text-ink">↵</span>
-                  </button>
-                  <span className="text-paper/40">best with sound on</span>
-                </div>
-              </div>
+              <LiquidName register={register} />
             </motion.div>
           </div>
-
-          <motion.div
-            className="code-label flex justify-between p-5 text-paper/40 md:p-8"
-            animate={{ opacity: zoom ? 0 : 1 }}
-            transition={{ duration: 0.25 }}
-          >
-            <span>{"// engineer × designer"}</span>
-            <span>san francisco, ca</span>
-          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

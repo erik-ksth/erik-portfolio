@@ -30,7 +30,7 @@ export default function Header() {
         className="fixed left-4 top-4 z-[900] flex items-baseline gap-3 text-white mix-blend-difference md:left-8 md:top-6"
       >
         <span className="font-display text-[1.2rem] font-extrabold uppercase leading-none tracking-[-0.02em] md:text-[1.35rem]">Erik Hein</span>
-        <span className="code-label hidden opacity-70 md:inline">/ engineer × designer</span>
+        <span className="code-label hidden opacity-70 md:inline">/ product engineer</span>
       </motion.a>
 
       <motion.div {...intro} className="fixed right-4 top-4 z-[900] flex gap-2 md:right-8 md:top-6">

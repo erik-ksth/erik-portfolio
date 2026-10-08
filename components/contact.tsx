@@ -30,6 +30,13 @@ function LocalTime() {
   return <span className="tabular-nums">{time ?? "--:--"} PT</span>;
 }
 
+const footerLinks = [
+  { label: "Work", target: "#work" },
+  { label: "Résumé", href: "/Erik Hein Resume.pdf" },
+  { label: "Experience", target: "#experience" },
+  { label: "Back to top", target: 0 },
+] as const;
+
 const field =
   "w-full bg-transparent py-2 text-lg text-paper outline-none placeholder:text-paper/30";
 
@@ -55,7 +62,7 @@ export default function Contact() {
           <AuroraScene active={inView} container={panel} />
         </div>
 
-        <div className="relative px-4 pb-6 pt-[16vh] md:px-8">
+        <div className="relative px-4 pt-[16vh] md:px-8">
           <SectionLabel index="05" className="text-signal">
             contact
           </SectionLabel>
@@ -172,23 +179,48 @@ export default function Contact() {
             </FadeUp>
           </div>
 
-          {/* The signature returns: same mark the preloader drew */}
-          <div className="mt-[12vh] overflow-hidden">
-            <motion.p
-              aria-hidden
-              style={{ y: wordmarkY }}
-              className="select-none whitespace-nowrap text-center font-display text-[10vw] font-extrabold uppercase leading-[0.85] tracking-[-0.03em] text-signal"
-            >
-              Erik Hein
-            </motion.p>
-          </div>
+          <footer className="mt-[16vh]">
+            <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+              <p className="font-display text-[clamp(1.2rem,1.6vw,1.6rem)] font-semibold leading-[1.35] tracking-[-0.02em]">
+                Built by Erik Hein in San Francisco.
+                <br />
+                Best enjoyed with the sound on.
+              </p>
+              <ul className="grid grid-cols-2 gap-x-14 gap-y-3 text-[1.05rem] text-paper/60">
+                {footerLinks.map((l) => (
+                  <li key={l.label}>
+                    {"href" in l ? (
+                      <a href={l.href} target="_blank" className="transition-colors hover:text-paper">
+                        {l.label}
+                      </a>
+                    ) : (
+                      <button onClick={() => scrollTo(l.target)} className="transition-colors hover:text-paper">
+                        {l.label}
+                      </button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="mt-6 flex flex-col gap-3 border-t border-paper/10 pt-5 font-mono text-xs text-paper/40 sm:flex-row sm:items-center sm:justify-between">
-            <span>© {new Date().getFullYear()} Erik Hein</span>
-            <button onClick={() => scrollTo(0)} className="draw-link self-start text-paper sm:self-auto">
-              back to top ↑
-            </button>
-          </div>
+            <div className="mt-12 flex flex-col gap-3 border-t border-paper/10 pt-6 font-mono text-xs text-paper/50 sm:flex-row sm:items-center sm:justify-between">
+              <a href={`mailto:${email}`} className="transition-colors hover:text-paper">
+                {email}
+              </a>
+              <span>© {new Date().getFullYear()} Erik Hein</span>
+            </div>
+          </footer>
+        </div>
+
+        {/* The name, edge to edge, rising up and cropped by the bottom of the page. */}
+        <div className="relative mt-[10vh] h-[19vw] overflow-hidden">
+          <motion.p
+            aria-hidden
+            style={{ y: wordmarkY }}
+            className="footer-wordmark select-none whitespace-nowrap text-center font-display text-[25.5vw] font-extrabold leading-[0.8] tracking-[-0.045em]"
+          >
+            Erik Hein
+          </motion.p>
         </div>
       </div>
     </section>

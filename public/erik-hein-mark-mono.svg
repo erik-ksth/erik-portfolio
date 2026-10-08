@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Erik Hein monogram</title>
+  <desc id="desc">A geometric E and H monogram for single-color use.</desc>
+  <path
+    fill="currentColor"
+    d="M8 8h50v18H30v29h24v18H30v29h28v18H8V8Zm58 0h22v45h18V8h22v112h-22V75H88v45H66V8Z"
+  />
+</svg>

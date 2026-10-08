@@ -44,9 +44,9 @@ export default function About() {
         <h2 className="font-display text-[clamp(2rem,4.4vw,4.6rem)] font-bold leading-[1.05] tracking-[-0.03em]">
           <RevealLines
             lines={[
-              "Building software,",
+              "Chasing better views,",
               <>
-                chasing <span className="mark">better views.</span>
+                on screen <span className="mark">and off.</span>
               </>,
             ]}
             lineClassName={["", "md:pl-[16vw]"]}
@@ -56,7 +56,7 @@ export default function About() {
         <div ref={thumb} className="mb-2 aspect-[3/2] w-[clamp(7rem,14vw,13rem)] shrink-0" />
       </div>
 
-      <div className="mt-14 grid gap-14 md:mt-20 md:grid-cols-12 md:items-end md:gap-8">
+      <div className="mt-14 grid gap-14 md:mt-20 md:grid-cols-12 md:items-center md:gap-8">
         {/* The landing slot. The WebGL layer above draws the photo here once it arrives. */}
         <div className="md:col-span-7">
           <div

@@ -54,6 +54,14 @@ html.is-loading {
     -webkit-box-decoration-break: clone;
   }
 
+  /* Giant footer name: paper at the top, fading into the night below */
+  .footer-wordmark {
+    background: linear-gradient(to bottom, #f4f4f1 15%, rgba(244, 244, 241, 0.3) 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* Code-comment section labels: // 01 about */
   .code-label {
     font-family: var(--font-mono);
