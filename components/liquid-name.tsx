@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 
 // The loading screen's progress: the name fills up with yellow like liquid.
 // It also tells the preloader where to zoom ("origin", relative to the zoom
@@ -60,7 +60,7 @@ export default function LiquidName({ register }: Props) {
   const text = useRef<SVGTextElement>(null);
   const wave = useRef<SVGPathElement>(null);
   const level = useRef(0);
-  const shown = useRef(0);
+  const clipId = `loader-liquid-${useId().replace(/:/g, "")}`;
 
   useEffect(() => {
     register({
@@ -72,9 +72,9 @@ export default function LiquidName({ register }: Props) {
     const top = 50;
     const bottom = 186;
     const draw = (now: number) => {
-      // Ease toward the real progress so the surface rises smoothly.
-      shown.current += (level.current - shown.current) * 0.08;
-      const p = shown.current;
+      // The parent already supplies eased progress. Reading it directly keeps
+      // the fill accurate even when a mobile browser drops animation frames.
+      const p = level.current;
       const y = bottom - (bottom - top) * p;
       const amp = 7 * Math.sin(Math.PI * Math.min(p * 1.15, 1)); // calm at empty and full
       const t = now / 1000;
@@ -98,18 +98,19 @@ export default function LiquidName({ register }: Props) {
     x: 500,
     y: BASELINE,
     textAnchor: "middle" as const,
-    fontFamily: "var(--font-display)",
     fontWeight: 800,
     fontSize: FONT_SIZE,
+    style: { fontFamily: "var(--font-display)" },
   };
   return (
     <svg
       viewBox="0 0 1000 240"
+      preserveAspectRatio="xMidYMid meet"
       className="w-full overflow-visible"
       aria-label={NAME}
     >
       <defs>
-        <clipPath id="loader-liquid">
+        <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
           <path ref={wave} d="M0 240 L1000 240 Z" />
         </clipPath>
       </defs>
@@ -117,7 +118,7 @@ export default function LiquidName({ register }: Props) {
       <text ref={text} {...common} fill="var(--signal)" fillOpacity="0.14">
         {NAME}
       </text>
-      <text {...common} fill="var(--signal)" clipPath="url(#loader-liquid)">
+      <text {...common} fill="var(--signal)" clipPath={`url(#${clipId})`}>
         {NAME}
       </text>
     </svg>

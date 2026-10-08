@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormStatus } from "react-dom";
+import { ReturnIcon } from "./ui/icons";
 
 export default function SubmitBtn() {
   const { pending } = useFormStatus();
@@ -16,7 +17,7 @@ export default function SubmitBtn() {
         </>
       ) : (
         <>
-          send message <span aria-hidden>↵</span>
+          send message <ReturnIcon />
         </>
       )}
     </button>

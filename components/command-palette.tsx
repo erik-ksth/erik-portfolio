@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { email, links, socials } from "@/lib/data";
 import { keysAssembledStore, paletteStore, usePaletteOpen } from "@/lib/store";
 import { useScrollTo } from "./smooth-scroll";
+import { ArrowDownIcon, ArrowUpIcon, ArrowUpRightIcon, ReturnIcon } from "./ui/icons";
 import { play } from "@/lib/sound";
 
 type Item = { group: string; label: string; hint: string; run: () => void };
@@ -56,7 +57,7 @@ export default function CommandPalette() {
       ...socials.map((s) => ({
         group: "Elsewhere",
         label: s.name,
-        hint: "↗",
+        hint: "external",
         run: () => window.open(s.href, "_blank", "noopener,noreferrer"),
       })),
     ],
@@ -168,7 +169,13 @@ export default function CommandPalette() {
                     >
                       <span>{item.label}</span>
                       <span className={`font-mono text-xs ${i === active ? "text-ink" : "text-muted"}`}>
-                        {i === active ? "↵" : item.hint}
+                        {i === active ? (
+                          <ReturnIcon />
+                        ) : item.hint === "external" ? (
+                          <ArrowUpRightIcon />
+                        ) : (
+                          item.hint
+                        )}
                       </span>
                     </button>
                   </li>
@@ -177,8 +184,14 @@ export default function CommandPalette() {
             </ul>
 
             <div className="flex gap-4 border-t border-ink/10 px-5 py-3 font-mono text-[0.7rem] text-muted">
-              <span>↑↓ navigate</span>
-              <span>↵ select</span>
+              <span className="sm:hidden">tap an item to select</span>
+              <span className="hidden items-center gap-1 sm:flex">
+                <ArrowUpIcon className="h-3 w-3" />
+                <ArrowDownIcon className="h-3 w-3" /> navigate
+              </span>
+              <span className="hidden items-center gap-1 sm:flex">
+                <ReturnIcon className="h-3 w-3" /> select
+              </span>
               <span className="ml-auto">
                 <span className="font-display text-xs font-bold text-ink">ERIK HEIN</span> · menu
               </span>

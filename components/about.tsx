@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useScroll } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FadeUp, RevealLines, SectionLabel } from "./ui/reveal";
+import { ArrowUpRightIcon } from "./ui/icons";
 import { useScrollTo } from "./smooth-scroll";
 
 const MorphSheetScene = dynamic(() => import("./three/morph-sheet-scene"), { ssr: false });
@@ -89,7 +90,7 @@ export default function About() {
 
           <FadeUp delay={0.12} className="flex flex-wrap gap-3">
             <a href="/Erik Hein Resume.pdf" target="_blank" className="key key-dark">
-              résumé <span aria-hidden>↗</span>
+              résumé <ArrowUpRightIcon />
             </a>
             <button onClick={() => scrollTo("#contact")} className="key">
               say hello

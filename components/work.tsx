@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-
 import { useInView } from "react-intersection-observer";
 import { projectsData } from "@/lib/data";
 import { SectionLabel } from "./ui/reveal";
+import { ArrowUpRightIcon } from "./ui/icons";
 import { play } from "@/lib/sound";
 
 const GalleryScene = dynamic(() => import("./three/gallery-scene"), { ssr: false });
@@ -111,7 +112,7 @@ export default function Work() {
               rel="noopener noreferrer"
               className="key key-signal pointer-events-auto"
             >
-              open project <span aria-hidden>↗</span>
+              open project <ArrowUpRightIcon />
             </a>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useKeysAssembled, usePreloaderDone } from "@/lib/store";
 import { RevealLines } from "./ui/reveal";
+import { ArrowDownIcon } from "./ui/icons";
 import { useScrollTo } from "./smooth-scroll";
 
 const KeysScene = dynamic(() => import("./three/keys-scene"), { ssr: false });
@@ -58,7 +59,7 @@ export default function Hero() {
           </p>
           <div className="pointer-events-auto flex gap-3">
             <button onClick={() => scrollTo("#work")} className="key key-dark">
-              see work <span aria-hidden>↓</span>
+              see work <ArrowDownIcon />
             </button>
           </div>
         </motion.div>

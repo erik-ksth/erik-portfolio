@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { sendEmail } from "@/actions/sendEmail";
 import { email, socials } from "@/lib/data";
 import { FadeUp, RevealLines, SectionLabel } from "./ui/reveal";
+import { ArrowUpRightIcon } from "./ui/icons";
 import SubmitBtn from "./submit-btn";
 import { useScrollTo } from "./smooth-scroll";
 import { play } from "@/lib/sound";
@@ -104,9 +105,7 @@ export default function Contact() {
                         <span className="transition-transform duration-500 ease-out group-hover:translate-x-2">
                           {s.name}
                         </span>
-                        <span aria-hidden className="font-mono text-sm text-paper/40 group-hover:text-signal">
-                          ↗
-                        </span>
+                        <ArrowUpRightIcon className="h-4 w-4 text-paper/40 transition-colors group-hover:text-signal" />
                       </a>
                     </li>
                   ))}

@@ -10,13 +10,19 @@ import LiquidName, { type LoaderApi } from "./liquid-name";
 const DURATION = 2400;
 // Never hold the visitor longer than this, even if fonts are slow.
 const MAX_WAIT = 4000;
-const ZOOM_SCALE = 120;
+const DESKTOP_ZOOM_SCALE = 72;
+// Large compositor scales can disappear or stall on iOS Safari. This is still
+// enough to fly through the letterform without exceeding mobile GPU limits.
+const MOBILE_ZOOM_SCALE = 28;
+
+type Zoom = { origin: string; scale: number };
 
 export default function Preloader() {
   const [visible, setVisible] = useState(true);
-  const [zoom, setZoom] = useState<{ origin: string } | null>(null);
+  const [zoom, setZoom] = useState<Zoom | null>(null);
   const nameRef = useRef<HTMLDivElement>(null);
   const api = useRef<LoaderApi | null>(null);
+  const exitFallback = useRef<number | null>(null);
   const lenis = useLenis();
   const revealRef = useRef<() => void>(() => {});
 
@@ -42,7 +48,14 @@ export default function Preloader() {
 
     const start = performance.now();
     let raf = 0;
+    let revealed = false;
     const reveal = () => {
+      if (revealed) return;
+      revealed = true;
+      if (exitFallback.current !== null) {
+        window.clearTimeout(exitFallback.current);
+        exitFallback.current = null;
+      }
       play("land");
       setVisible(false);
       document.documentElement.classList.remove("is-loading");
@@ -66,8 +79,12 @@ export default function Preloader() {
       } catch {
         // Fall back to the centre if the font can't be measured.
       }
-      setZoom({ origin });
+      const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+      setZoom({ origin, scale: mobile ? MOBILE_ZOOM_SCALE : DESKTOP_ZOOM_SCALE });
       playSoon("whoosh");
+      // WebKit can occasionally omit animation completion callbacks when a
+      // transformed SVG layer is promoted. Never let that strand the visitor.
+      exitFallback.current = window.setTimeout(reveal, 1400);
     };
     let finished = false;
 
@@ -97,6 +114,8 @@ export default function Preloader() {
     return () => {
       cancelAnimationFrame(raf);
       clearInterval(interval);
+      if (exitFallback.current !== null) window.clearTimeout(exitFallback.current);
+      document.documentElement.classList.remove("is-loading");
     };
   }, []);
 
@@ -109,7 +128,7 @@ export default function Preloader() {
       {visible && (
         <motion.div
           key="preloader"
-          className="fixed inset-0 z-[10000] flex flex-col overflow-hidden bg-night text-paper"
+          className="fixed inset-0 z-[10000] flex h-[100dvh] w-screen flex-col overflow-hidden bg-night text-paper"
           // As the zoom fills the screen the backdrop turns yellow too, so the
           // hand-off is always a clean yellow frame, which then dissolves.
           animate={zoom ? { backgroundColor: "#ffd60a" } : undefined}
@@ -125,7 +144,7 @@ export default function Preloader() {
               ref={nameRef}
               className="relative w-[min(92vw,900px)] will-change-transform"
               style={{ transformOrigin: zoom?.origin ?? "50% 50%" }}
-              animate={zoom ? { scale: ZOOM_SCALE } : { scale: 1 }}
+              animate={zoom ? { scale: zoom.scale } : { scale: 1 }}
               transition={{ duration: 1, ease: [0.7, 0, 0.84, 0] }}
               onAnimationComplete={() => zoom && revealRef.current()}
             >
