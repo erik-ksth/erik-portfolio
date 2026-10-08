@@ -62,6 +62,24 @@ export const experiencesData = [
 // `image` points at the 1280px textures in /public/work, sized for WebGL.
 export const projectsData = [
   {
+    title: "Jamm",
+    subtitle: "A Disposable Camera for Your Whole Crew",
+    description:
+      "A shared disposable camera in the browser: friends join a roll with a QR code, everyone shoots, and every photo lands on one roll developed in a custom film stock, then cut into a recap for the group chat.",
+    tags: ["Web App", "Mobile App","Image Processing", "Astro"],
+    image: "/work/jamm.jpg",
+    link: "https://jamm.solarizstudio.com/",
+  },
+  {
+    title: "Study Buddy",
+    subtitle: "Productivity Companion",
+    description:
+      "A cozy study companion: Pomodoro timer, to-do list, ambient sounds and music, plus built-in tools like a calculator, flashcards and a notepad, all kept company by cute study buddy characters.",
+    tags: ["React", "Vite", "PostHog", "Web App"],
+    image: "/work/study-buddy.jpg",
+    link: "https://study-buddy.vercel.app/",
+  },
+  {
     title: "Jade AI",
     subtitle: "Conversational Data Analyst",
     description:
@@ -77,7 +95,7 @@ export const projectsData = [
       "AI-powered camping planner that generates personalized itineraries based on user preferences and location.",
     tags: ["React Native", "Expo", "Supabase", "Mobile App"],
     image: "/work/trekteria.jpg",
-    link: "https://trekteria.com/",
+    link: "https://trekteria.vercel.app/",
   },
   {
     title: "YT Commerizer",
@@ -96,15 +114,6 @@ export const projectsData = [
     tags: ["React", "Generative AI", "JavaScript", "Web App"],
     image: "/work/typeInZen.jpg",
     link: "https://typeinzen.vercel.app/",
-  },
-  {
-    title: "Study Buddy",
-    subtitle: "Productivity Companion",
-    description:
-      "A web app to boost productivity: Pomodoro timer, to-do list, ambient sounds and music, and inspirational quotes from famous people.",
-    tags: ["HTML", "CSS", "JavaScript", "JQuery"],
-    image: "/work/studybuddy.jpg",
-    link: "https://study-buddy.vercel.app/",
   },
 ] as const;
 
