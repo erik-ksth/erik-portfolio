@@ -83,9 +83,9 @@ export const experiencesData = [
 
 export const projectsData = [
   {
-    title: "JadeAI: Cursor for Data Analysis",
+    title: "Jade AI: Conversational Data Analyst",
     description:
-      "Best use of Groq prize winner at CalHacks 12.0 - An AI-powered conversational data analyst that lets users clean, analyze, and visualize datasets using natural language commands.",
+      "Winner, Best Use of Groq at Cal Hacks 12.0. An AI data analyst for messy spreadsheets: describe the fix in plain English, and a LangGraph workflow writes and runs the pandas code, then charts the result.",
     tags: ["Next.JS", "Python", "Fast API", "Pandas"],
     imageUrl: jadeAIImg,
     link: "https://jade-ai-landing.vercel.app",
