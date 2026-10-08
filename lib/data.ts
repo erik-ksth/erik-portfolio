@@ -11,6 +11,7 @@ export const socials = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/erikhein/" },
   { name: "GitHub", href: "https://github.com/erik-ksth" },
   { name: "YouTube", href: "https://www.youtube.com/@erik-hein" },
+  { name: "Instagram", href: "https://www.instagram.com/erikh.zip/" },
   { name: "Behance", href: "https://www.behance.net/kaungsithu32" },
 ] as const;
 
