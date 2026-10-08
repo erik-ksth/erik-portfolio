@@ -1,44 +1,27 @@
-import studybuddyImg from "@/public/studybuddy.png";
-import recipeGeniusImg from "@/public/recipeGenius.png";
-import snapClientImg from "@/public/snapClient.png";
-import enstantImg from "@/public/enstant.png";
-import typeInZenImg from "@/public/typeInZen.png";
-import zenBoardImg from "@/public/zenBoard.png";
-import aroundUImg from "@/public/aroundU.png";
-import sjsnapImg from "@/public/sjSnap.png";
-import trekteriaImg from "@/public/trekteria.png";
-import getaImg from "@/public/gita.png";
-import ytCommerizerImg from "@/public/ytCommerizer.png";
-import jadeAIImg from "@/public/jadeAi.png";
-
 export const links = [
-  {
-    name: "Home",
-    hash: "#home",
-  },
-  {
-    name: "Projects",
-    hash: "#projects",
-  },
-  {
-    name: "About",
-    hash: "#about",
-  },
-  {
-    name: "Skills",
-    hash: "#skills",
-  },
-  {
-    name: "Experience",
-    hash: "#experience",
-  },
-  {
-    name: "Contact",
-    hash: "#contact",
-  },
+  { name: "Home", hash: "#home" },
+  { name: "About", hash: "#about" },
+  { name: "Work", hash: "#work" },
+  { name: "Skills", hash: "#skills" },
+  { name: "Experience", hash: "#experience" },
+  { name: "Contact", hash: "#contact" },
 ] as const;
 
+export const socials = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/erikhein/" },
+  { name: "GitHub", href: "https://github.com/erik-ksth" },
+  { name: "YouTube", href: "https://www.youtube.com/@erik-hein" },
+  { name: "Behance", href: "https://www.behance.net/kaungsithu32" },
+] as const;
+
+export const email = "erikhein.ksth@gmail.com";
+
 export const experiencesData = [
+  {
+    title: "Full-stack Developer / Founder",
+    location: "Solariz Studio LLC",
+    date: "May 2026 - present",
+  },
   {
     title: "Software Engineer",
     location: "Iditor Inc.",
@@ -70,120 +53,58 @@ export const experiencesData = [
     date: "Jun 2023",
   },
   {
-    title: "Vice President",
-    location: "De Anza International Students Connection",
-    date: "Mar 2022 - May 2023",
-  },
-  {
     title: "Co-Founder and Project Leader",
     location: "Robotics Society of De Anza",
     date: "Mar 2022 - Oct 2022",
   },
 ] as const;
 
+// `image` points at the 1280px textures in /public/work, sized for WebGL.
 export const projectsData = [
   {
-    title: "Jade AI: Conversational Data Analyst",
+    title: "Jade AI",
+    subtitle: "Conversational Data Analyst",
     description:
       "Winner, Best Use of Groq at Cal Hacks 12.0. An AI data analyst for messy spreadsheets: describe the fix in plain English, and a LangGraph workflow writes and runs the pandas code, then charts the result.",
     tags: ["Next.JS", "Python", "Fast API", "Pandas"],
-    imageUrl: jadeAIImg,
+    image: "/work/jadeAi.jpg",
     link: "https://jade-ai-landing.vercel.app",
   },
   {
-    title: "Trekteria: AI-Powered Camping Planner",
+    title: "Trekteria",
+    subtitle: "AI-Powered Camping Planner",
     description:
       "AI-powered camping planner that generates personalized itineraries based on user preferences and location.",
     tags: ["React Native", "Expo", "Supabase", "Mobile App"],
-    imageUrl: trekteriaImg,
+    image: "/work/trekteria.jpg",
     link: "https://trekteria.com/",
   },
   {
     title: "YT Commerizer",
+    subtitle: "Video Insight Extension",
     description:
       "A browser extension that analyzes YouTube videos and provides a sentiment analysis and summary of the video.",
-    tags: [
-      "Chrome Extension",
-      "Node.js",
-      "React",
-      "Vite",
-      "Generative AI",
-      "GCP",
-    ],
-    imageUrl: ytCommerizerImg,
+    tags: ["Chrome Extension", "Node.js", "React", "Vite", "Generative AI", "GCP"],
+    image: "/work/ytCommerizer.jpg",
     link: "https://chromewebstore.google.com/detail/ejbelaeciihalcbaikocbheoefhikicb?utm_source=item-share-cb",
   },
   {
-    title: "Gita: Video-to-Music Generator",
+    title: "Type In Zen",
+    subtitle: "Relaxing Typing Game",
     description:
-      "A video-to-music generator that generates music based on the video's content using AI.",
-    tags: ["React", "Python", "FastAPI", "Google ADK", "Lyria AI", "Groq"],
-    imageUrl: getaImg,
-    link: "https://devpost.com/software/gita-ai-powered-video-to-music-generation-platform",
-  },
-  {
-    title: "SJ Snap: AI-Powered Civic Engagment Web App",
-    description:
-      "AI-driven web app for reporting San Jose City issues and suggestions through the 311 system.",
-    tags: ["Project Management", "Gen AI", "Next JS", "Supabase"],
-    imageUrl: sjsnapImg,
-    link: "https://devpost.com/software/sj-snap",
-  },
-  {
-    title: "Around U: Local Event Finder",
-    description:
-      "A local event discvoery app that helps users find and register for nearby events and activities.",
-    tags: ["Java", "Android Studio", "Kotlin", "Google Maps API"],
-    imageUrl: aroundUImg,
-    link: "https://github.com/erik-ksth/cs175eventfinder",
-  },
-  {
-    title: "Zen Board: AI Productivity Scheduler",
-    description:
-      "An AI scheduling app that genereate a productive schedule for the user based on their input and the availability of the user.",
-    tags: ["React", "Generative AI", "Next JS", "Typescript"],
-    imageUrl: zenBoardImg,
-    link: "https://zenboardai.vercel.app/",
-  },
-  {
-    title: "Type In Zen: Relaxing Typing Game",
-    description:
-      "A zen, relaxing and calming typing game with relaxing ambient sounds. The content is generated by AI.",
+      "A zen, calming typing game with relaxing ambient sounds. The content is generated by AI.",
     tags: ["React", "Generative AI", "JavaScript", "Web App"],
-    imageUrl: typeInZenImg,
+    image: "/work/typeInZen.jpg",
     link: "https://typeinzen.vercel.app/",
   },
   {
     title: "Study Buddy",
+    subtitle: "Productivity Companion",
     description:
-      "A web app to boost productivity. It includes Pomodoro Timer, To-Do-List, Different kinds of ambient sounds and musics and Inspriational quotes by famouse people",
+      "A web app to boost productivity: Pomodoro timer, to-do list, ambient sounds and music, and inspirational quotes from famous people.",
     tags: ["HTML", "CSS", "JavaScript", "JQuery"],
-    imageUrl: studybuddyImg,
+    image: "/work/studybuddy.jpg",
     link: "https://study-buddy.vercel.app/",
-  },
-  {
-    title: "Recipe Genius",
-    description:
-      "An application that generate possible dishes and recipes depending on the ingredients in the fridge. A project for Object Oriented Design class at SJSU.",
-    tags: ["JAVA", "JavaFX", "API", "Object Oriented Design"],
-    imageUrl: recipeGeniusImg,
-    link: "https://github.com/erik-ksth/CS151-RecipeGenius",
-  },
-  {
-    title: "Enstant",
-    description:
-      "A responsive website for business card ordering service by Oakmead Printing Inc.",
-    tags: ["React", "Tailwind", "Material UI", "Email.JS"],
-    imageUrl: enstantImg,
-    link: "https://enstant.vercel.app/",
-  },
-  {
-    title: "Snap Client",
-    description:
-      "A responsive website for a medical software company, SnapClient. Used plugins for creating the components (Contact form, map, etc.) and tracking user engagement.",
-    tags: ["WordPress", "Site 5"],
-    imageUrl: snapClientImg,
-    link: "https://snapclient.com/",
   },
 ] as const;
 

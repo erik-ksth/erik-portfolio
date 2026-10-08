@@ -1,122 +1,192 @@
 "use client";
 
-import React from "react";
-import SectionHeading from "./section-heading";
-import { motion } from "framer-motion";
-import { useSectionInView } from "@/lib/hook";
-import { sendEmail } from "@/actions/sendEmail";
-import SubmitBtn from "./submit-btn";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import toast from "react-hot-toast";
-import { BsLinkedin } from "react-icons/bs";
-import { FaGithubSquare, FaBehanceSquare, FaYoutube } from "react-icons/fa";
+import { sendEmail } from "@/actions/sendEmail";
+import { email, socials } from "@/lib/data";
+import { FadeUp, RevealLines, SectionLabel } from "./ui/reveal";
+import SubmitBtn from "./submit-btn";
+import { useScrollTo } from "./smooth-scroll";
+
+const AuroraScene = dynamic(() => import("./three/aurora-scene"), { ssr: false });
+
+function LocalTime() {
+  const [time, setTime] = useState<string | null>(null);
+  useEffect(() => {
+    const fmt = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    const tick = () => setTime(fmt.format(new Date()));
+    tick();
+    const id = setInterval(tick, 15_000);
+    return () => clearInterval(id);
+  }, []);
+  return <span className="tabular-nums">{time ?? "--:--"} PT</span>;
+}
+
+const field =
+  "w-full bg-transparent py-2 text-lg text-paper outline-none placeholder:text-paper/30";
 
 export default function Contact() {
-  const { ref } = useSectionInView("Contact");
+  const panel = useRef<HTMLDivElement>(null);
+  const form = useRef<HTMLFormElement>(null);
+  const scrollTo = useScrollTo();
+  const { ref: inViewRef, inView } = useInView({ threshold: 0 });
+
+  const { scrollYProgress } = useScroll({ target: panel, offset: ["start end", "end end"] });
+  const wordmarkY = useTransform(scrollYProgress, [0.4, 1], ["35%", "0%"]);
 
   return (
-    <section
-      ref={ref}
-      id="contact"
-      className="scroll-mt-20 py-20 w-full min-h-[80vh] flex flex-col justify-center"
-    >
-      <SectionHeading>Get In Touch</SectionHeading>
+    <section id="contact">
+      <div
+        ref={(el) => {
+          (panel as React.MutableRefObject<HTMLDivElement | null>).current = el;
+          inViewRef(el);
+        }}
+        className="relative overflow-hidden bg-night text-paper"
+      >
+        <div className="absolute inset-0">
+          <AuroraScene active={inView} container={panel} />
+        </div>
 
-      <div className="w-full max-w-5xl mx-auto px-4 mt-10 md:mt-20 font-mono">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="border-4 border-black dark:border-white bg-white dark:bg-black overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
-        >
-          {/* Terminal Header */}
-          <div className="bg-black dark:bg-white text-white dark:text-black p-4 flex items-center justify-between border-b-4 border-black dark:border-white">
-            <div className="flex gap-4">
-              <div className="w-4 h-4 rounded-full bg-white dark:bg-black border-2 border-transparent"></div>
-              <div className="w-4 h-4 rounded-full bg-white dark:bg-black border-2 border-transparent opacity-50"></div>
-              <div className="w-4 h-4 rounded-full bg-white dark:bg-black border-2 border-transparent opacity-50"></div>
-            </div>
-            <div className="font-bold uppercase tracking-widest">contact_protocol.exe</div>
-            <div className="w-16"></div> {/* Spacer for centering */}
-          </div>
+        <div className="relative px-4 pb-6 pt-[16vh] md:px-8">
+          <SectionLabel index="05" className="text-signal">
+            contact
+          </SectionLabel>
+          <h2 className="mt-8 font-display text-[clamp(2rem,4.8vw,5rem)] font-bold leading-[1.05] tracking-[-0.03em]">
+            <RevealLines
+              lines={[
+                "Let's make something",
+                <>
+                  <span className="mark">worth</span> remembering.
+                </>,
+              ]}
+              lineClassName={["", "md:pl-[16vw]"]}
+            />
+          </h2>
 
-          {/* Terminal Body */}
-          <div className="p-8 md:p-12 text-black dark:text-white">
-            {/* System Variables */}
-            <div className="mb-12 space-y-2 opacity-70">
-              <p>{`> INITIALIZING CONNECTION...`}</p>
-              <p>{`> TARGET: ERIK HEIN`}</p>
-              <p>{`> LOADING SYSTEM VARIABLES...`}</p>
-              <div className="pl-4 border-l-2 border-black dark:border-white mt-4 space-y-1">
-                <p>{`const EMAIL = "erikhein.ksth@gmail.com";`}</p>
-                <p>{`const LOCATION = "San Francisco, CA";`}</p>
-                <div className="flex flex-wrap gap-1">
-                  <span>const SOCIALS = [</span>
-                  <a href="https://www.linkedin.com/in/erikhein/" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;LinkedIn&quot;</a>,
-                  <a href="https://github.com/erik-ksth" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;GitHub&quot;</a>,
-                  <a href="https://www.youtube.com/@erik-hein" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;YouTube&quot;</a>,
-                  <a href="https://www.behance.net/kaungsithu32" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">&quot;Behance&quot;</a>
-                  <span>];</span>
+          <div className="mt-[10vh] grid gap-14 md:grid-cols-12 md:gap-8">
+            <FadeUp className="space-y-10 md:col-span-5">
+              <div>
+                <p className="code-label text-paper/40">{"// email"}</p>
+                <a
+                  href={`mailto:${email}`}
+                  className="draw-link mt-2 inline-block text-[clamp(1.15rem,1.7vw,1.6rem)] tracking-[-0.02em]"
+                  data-cursor="write"
+                >
+                  {email}
+                </a>
+              </div>
+              <div>
+                <p className="code-label text-paper/40">{"// elsewhere"}</p>
+                <ul className="mt-3 border-t border-paper/10">
+                  {socials.map((s) => (
+                    <li key={s.name}>
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-between border-b border-paper/10 py-3 text-lg transition-colors hover:text-signal"
+                      >
+                        <span className="transition-transform duration-500 ease-out group-hover:translate-x-2">
+                          {s.name}
+                        </span>
+                        <span aria-hidden className="font-mono text-sm text-paper/40 group-hover:text-signal">
+                          ↗
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex gap-10 font-mono text-xs text-paper/40">
+                <div>
+                  <p>{"// based in"}</p>
+                  <p className="mt-1 font-display text-base font-bold text-paper">San Francisco, CA</p>
+                </div>
+                <div>
+                  <p>{"// local time"}</p>
+                  <p className="mt-1 font-display text-base font-bold text-paper">
+                    <LocalTime />
+                  </p>
                 </div>
               </div>
-              <p className="mt-4">{`> READY FOR INPUT.`}</p>
-            </div>
+            </FadeUp>
 
-            {/* Form */}
-            <form
-              className="space-y-8"
-              action={async (formData) => {
-                const { data, error } = await sendEmail(formData);
+            <FadeUp delay={0.1} className="md:col-span-6 md:col-start-7">
+              <form
+                ref={form}
+                className="overflow-hidden rounded-md border border-paper/10 bg-night/70 backdrop-blur-md"
+                action={async (formData) => {
+                  const { error } = await sendEmail(formData);
+                  if (error) {
+                    toast.error(error);
+                    return;
+                  }
+                  toast.success("Message sent. Talk soon!");
+                  form.current?.reset();
+                }}
+              >
+                <div className="flex items-center justify-between border-b border-paper/10 px-4 py-2.5 font-mono text-xs">
+                  <span className="rounded-sm bg-paper/10 px-2 py-0.5 text-paper/80">new-message.txt</span>
+                  <span className="text-paper/40">unsaved</span>
+                </div>
+                <div className="space-y-2 p-5 md:p-7">
+                  <label htmlFor="senderEmail" className="flex items-baseline gap-3 border-b border-paper/10 focus-within:border-signal">
+                    <span className="w-20 shrink-0 font-mono text-sm text-signal">from:</span>
+                    <input
+                      id="senderEmail"
+                      name="senderEmail"
+                      type="email"
+                      required
+                      maxLength={500}
+                      placeholder="you@company.com"
+                      className={field}
+                    />
+                  </label>
+                  <label htmlFor="message" className="flex items-baseline gap-3 border-b border-paper/10 pt-2 focus-within:border-signal">
+                    <span className="w-20 shrink-0 font-mono text-sm text-signal">message:</span>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      maxLength={5000}
+                      rows={5}
+                      placeholder="A project, a role, or just an idea…"
+                      className={`${field} resize-none`}
+                    />
+                  </label>
+                  <div className="pt-6">
+                    <SubmitBtn />
+                  </div>
+                </div>
+              </form>
+            </FadeUp>
+          </div>
 
-                if (error) {
-                  toast.error(error);
-                  return;
-                }
-
-                toast.success('Email sent successfully!');
-              }}
+          {/* The signature returns: same mark the preloader drew */}
+          <div className="mt-[12vh] overflow-hidden">
+            <motion.p
+              aria-hidden
+              style={{ y: wordmarkY }}
+              className="select-none whitespace-nowrap text-center font-display text-[10vw] font-extrabold uppercase leading-[0.85] tracking-[-0.03em] text-signal"
             >
-              <div className="space-y-2">
-                <label htmlFor="senderEmail" className="block font-bold uppercase">
-                  {`> ENTER SENDER EMAIL:`}
-                </label>
-                <div className="flex items-center gap-2">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold">$</span>
-                  <input
-                    id="senderEmail"
-                    className="w-full bg-transparent border-b-2 border-black dark:border-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 py-2 font-bold placeholder:text-gray-400/50"
-                    name="senderEmail"
-                    type="email"
-                    placeholder="user@example.com"
-                    required
-                    maxLength={500}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="message" className="block font-bold uppercase">
-                  {`> ENTER MESSAGE:`}
-                </label>
-                <div className="flex items-start gap-2">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold mt-2">$</span>
-                  <textarea
-                    id="message"
-                    className="w-full bg-transparent border-b-2 border-black dark:border-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 py-2 font-bold placeholder:text-gray-400/50 resize-none h-32"
-                    name="message"
-                    placeholder="Write your message here..."
-                    required
-                    maxLength={5000}
-                  />
-                </div>
-              </div>
-
-              <div className="pt-8">
-                <SubmitBtn />
-              </div>
-            </form>
+              Erik Hein
+            </motion.p>
           </div>
-        </motion.div>
+
+          <div className="mt-6 flex flex-col gap-3 border-t border-paper/10 pt-5 font-mono text-xs text-paper/40 sm:flex-row sm:items-center sm:justify-between">
+            <span>© {new Date().getFullYear()} Erik Hein</span>
+            <button onClick={() => scrollTo(0)} className="draw-link self-start text-paper sm:self-auto">
+              back to top ↑
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

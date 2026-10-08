@@ -1,54 +1,67 @@
 "use client";
 
-import React from "react";
-import SectionHeading from "./section-heading";
-import { experiencesData } from "@/lib/data";
-import { useSectionInView } from "@/lib/hook";
 import { motion } from "framer-motion";
+import { experiencesData } from "@/lib/data";
+import { RevealLines, SectionLabel } from "./ui/reveal";
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Experience() {
-  const { ref } = useSectionInView("Experience");
-
   return (
-    <section
-      ref={ref}
-      id="experience"
-      className="scroll-mt-20 py-20 w-full"
-    >
-      <SectionHeading>Experience & Education</SectionHeading>
+    <section id="experience" className="px-4 py-[16vh] md:px-8">
+      <SectionLabel index="04" className="text-muted">
+        experience &amp; education
+      </SectionLabel>
+      <h2 className="mt-8 font-display text-[clamp(2rem,4.4vw,4.6rem)] font-bold leading-[1.05] tracking-[-0.03em]">
+        <RevealLines
+          lines={[
+            "Where I've been",
+            <>
+              building <span className="mark">lately.</span>
+            </>,
+          ]}
+          lineClassName={["", "md:pl-[16vw]"]}
+        />
+      </h2>
 
-      <div className="w-full max-w-7xl mx-auto px-4 mt-10">
-        {/* Ledger Header */}
-        <div className="hidden md:grid grid-cols-12 border-b-4 border-black dark:border-white pb-4">
-          <div className="col-span-5 text-2xl font-black uppercase tracking-tighter">What</div>
-          <div className="col-span-4 text-2xl font-black uppercase tracking-tighter">Where</div>
-          <div className="col-span-3 text-2xl font-black uppercase tracking-tighter text-right">When</div>
-        </div>
-
-        {/* Ledger Rows */}
-        <div className="flex flex-col">
-          {experiencesData.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+      <ul className="mt-16 border-t border-line">
+        {experiencesData.map((item, i) => {
+          const current = item.date.includes("present");
+          return (
+            <motion.li
+              key={item.title + item.location}
+              className="group relative overflow-hidden border-b border-line"
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-0 border-b-4 border-black dark:border-white py-8 md:py-6 items-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-200 group"
+              viewport={{ once: true, margin: "-5% 0px" }}
+              transition={{ duration: 0.8, ease, delay: (i % 4) * 0.05 }}
             >
-              <div className="col-span-5 text-2xl md:text-3xl font-bold uppercase tracking-tight px-2">
-                {item.title}
+              {/* Ink fill wipes in from the left on hover */}
+              <div className="absolute inset-0 origin-left scale-x-0 bg-ink transition-transform duration-500 ease-out group-hover:scale-x-100" />
+              <div className="relative grid grid-cols-12 items-center gap-x-4 gap-y-1 px-1 py-5 transition-colors duration-500 group-hover:text-paper md:px-4 md:py-5">
+                <span className="col-span-2 font-mono text-xs text-muted transition-colors duration-500 group-hover:text-signal md:col-span-1">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="col-span-10 text-[clamp(1.1rem,1.6vw,1.5rem)] font-display font-bold leading-tight tracking-[-0.015em] transition-transform duration-500 ease-out group-hover:translate-x-2 md:col-span-5">
+                  {item.title}
+                </span>
+                <span className="col-span-10 col-start-3 text-[0.95rem] text-muted transition-colors duration-500 group-hover:text-paper/70 md:col-span-4 md:col-start-auto">
+                  {item.location}
+                </span>
+                <span className="col-span-10 col-start-3 flex items-center gap-2 font-mono text-sm md:col-span-2 md:col-start-auto md:justify-end">
+                  {current && (
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
+                    </span>
+                  )}
+                  {item.date}
+                </span>
               </div>
-              <div className="col-span-4 text-xl md:text-2xl font-medium px-2">
-                {item.location}
-              </div>
-              <div className="col-span-3 text-lg md:text-xl font-mono font-bold md:text-right px-2">
-                {item.date}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+            </motion.li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

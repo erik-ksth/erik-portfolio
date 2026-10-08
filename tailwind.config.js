@@ -7,39 +7,22 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {},
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       colors: {
-        black: "#1a1a1a", // Overriding default black to dark gray
-      },
-      animation: {
-        marquee: "marquee 300s linear infinite",
-        marquee2: "marquee2 300s linear infinite",
-        "marquee-reverse": "marquee-reverse 300s linear infinite",
-        "marquee-reverse2": "marquee-reverse2 300s linear infinite",
-      },
-      keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-100%)" },
-        },
-        marquee2: {
-          "0%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(0%)" },
-        },
-        "marquee-reverse": {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(0%)" },
-        },
-        "marquee-reverse2": {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(100%)" },
-        },
+        // Mirrors the CSS variables in globals.css; hex so `/opacity` modifiers work.
+        paper: "#f4f4f1",
+        ink: "#0a0a0a",
+        night: "#0a0a0a",
+        muted: "#6b6b66",
+        graphite: "#8a8a85",
+        line: "rgba(10, 10, 10, 0.14)",
+        signal: "#ffd60a",
       },
     },
   },
   plugins: [],
-  darkMode: "class",
 };
