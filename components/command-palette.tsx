@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { email, links, socials } from "@/lib/data";
 import { keysAssembledStore, paletteStore, usePaletteOpen } from "@/lib/store";
 import { useScrollTo } from "./smooth-scroll";
+import { play } from "@/lib/sound";
 
 type Item = { group: string; label: string; hint: string; run: () => void };
 
@@ -130,9 +131,11 @@ export default function CommandPalette() {
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
+                    play("tick", active + 1);
                     setActive((a) => Math.min(a + 1, filtered.length - 1));
                   } else if (e.key === "ArrowUp") {
                     e.preventDefault();
+                    play("tick", active - 1);
                     setActive((a) => Math.max(a - 1, 0));
                   } else if (e.key === "Enter") {
                     select(filtered[active]);

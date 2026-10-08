@@ -10,8 +10,10 @@ import {
   Physics,
   RigidBody,
   type RapierRigidBody,
+  type CollisionEnterPayload,
 } from "@react-three/rapier";
 import { COLORS, keysAssembledStore } from "@/lib/store";
+import { keyClack } from "@/lib/sound";
 import StudioEnv from "./studio-env";
 
 type Tone = "white" | "black" | "signal" | "graphite";
@@ -226,6 +228,24 @@ function Key({
     }
   });
 
+  // Keycap clacks: loudness follows how fast the two bodies met.
+  const lastClack = useRef(0);
+  const onCollisionEnter = ({ target, other }: CollisionEnterPayload) => {
+    const self = target.rigidBody;
+    const them = other.rigidBody;
+    if (!self) return;
+    // Both keys get this event; let only one of them make the sound.
+    if (them && them.isDynamic() && them.handle < self.handle) return;
+    const now = performance.now();
+    if (now - lastClack.current < 70) return;
+    const a = self.linvel();
+    const b = them ? them.linvel() : { x: 0, y: 0, z: 0 };
+    const speed = Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+    if (speed < 0.6) return;
+    lastClack.current = now;
+    keyClack(Math.min(speed / 7, 1) * (spec.slot ? 1 : 0.8), spec.tone, self.translation().x / 4);
+  };
+
   const w = UNIT * width;
   return (
     <RigidBody
@@ -236,6 +256,7 @@ function Key({
       linearDamping={4}
       angularDamping={1.5}
       friction={0.2}
+      onCollisionEnter={onCollisionEnter}
     >
       <CuboidCollider
         args={[(w / 2) * scale, (UNIT / 2) * scale, (DEPTH / 2) * scale]}

@@ -66,14 +66,14 @@ export default function Cursor() {
     <>
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9999] -ml-[5px] -mt-[5px] h-2.5 w-2.5 rounded-full bg-white mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[10001] -ml-[5px] -mt-[5px] h-2.5 w-2.5 rounded-full bg-white mix-blend-difference"
         style={{ x, y }}
         animate={{ scale: label ? 0 : pressed ? 0.6 : 1 }}
         transition={{ duration: 0.25 }}
       />
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9999]"
+        className="pointer-events-none fixed left-0 top-0 z-[10001]"
         style={{ x: sx, y: sy }}
       >
         <motion.div

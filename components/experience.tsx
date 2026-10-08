@@ -31,6 +31,9 @@ export default function Experience() {
             <motion.li
               key={item.title + item.location}
               className="group relative overflow-hidden border-b border-line"
+              // A soft tick that climbs in pitch row by row as you run down the list.
+              data-hover="tick"
+              data-hover-variant={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-5% 0px" }}

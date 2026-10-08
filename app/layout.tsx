@@ -7,6 +7,7 @@ import Preloader from "@/components/preloader";
 import Cursor from "@/components/cursor";
 import Header from "@/components/header";
 import CommandPalette from "@/components/command-palette";
+import SoundEffects from "@/components/sound-effects";
 
 const display = Outfit({ subsets: ["latin"], variable: "--font-display", weight: ["500", "600", "700", "800"] });
 const sans = Manrope({ subsets: ["latin"], variable: "--font-sans" });
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Cursor />
           <Header />
           <CommandPalette />
+          <SoundEffects />
           {children}
           <Toaster
             position="bottom-center"

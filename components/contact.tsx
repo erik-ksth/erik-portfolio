@@ -10,6 +10,7 @@ import { email, socials } from "@/lib/data";
 import { FadeUp, RevealLines, SectionLabel } from "./ui/reveal";
 import SubmitBtn from "./submit-btn";
 import { useScrollTo } from "./smooth-scroll";
+import { play } from "@/lib/sound";
 
 const AuroraScene = dynamic(() => import("./three/aurora-scene"), { ssr: false });
 
@@ -125,9 +126,11 @@ export default function Contact() {
                 action={async (formData) => {
                   const { error } = await sendEmail(formData);
                   if (error) {
+                    play("error");
                     toast.error(error);
                     return;
                   }
+                  play("success");
                   toast.success("Message sent. Talk soon!");
                   form.current?.reset();
                 }}

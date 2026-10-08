@@ -3,6 +3,17 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { preloaderStore } from "@/lib/store";
+import { getMusicPref, play, playSoon, setMusicOn } from "@/lib/sound";
+
+const VISITED_KEY = "erik-visited";
+
+function hasVisited() {
+  try {
+    return localStorage.getItem(VISITED_KEY) === "1" || localStorage.getItem("erik-sound") !== null;
+  } catch {
+    return false;
+  }
+}
 import { useLenis } from "./smooth-scroll";
 
 const DURATION = 2000;
@@ -59,6 +70,9 @@ export default function Preloader() {
   const [visible, setVisible] = useState(true);
   const [done, setDone] = useState(false);
   const [zoom, setZoom] = useState<{ origin: string } | null>(null);
+  // First-time visitors click "enter" (which also wakes up audio); returning ones skip it.
+  const [choosing, setChoosing] = useState(false);
+  const enterRef = useRef<() => void>(() => {});
   const nameRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<SVGTextElement>(null);
   const typedRef = useRef<HTMLSpanElement>(null);
@@ -90,11 +104,38 @@ export default function Preloader() {
     const start = performance.now();
     let raf = 0;
     const reveal = () => {
+      play("land");
       setVisible(false);
       document.documentElement.classList.remove("is-loading");
       preloaderStore.set(true);
     };
     revealRef.current = reveal;
+
+    // Fly into the name (or just reveal, for reduced motion).
+    const enter = () => {
+      setChoosing(false);
+      try {
+        localStorage.setItem(VISITED_KEY, "1");
+      } catch {
+        // Private mode: they'll just see "enter" again next time.
+      }
+      // Music is opt-in from the header; if they turned it on before, let the
+      // landing breathe and then bring the lofi in very slowly.
+      if (getMusicPref()) setMusicOn(true, false, { delay: 2.5, fade: 14 });
+      if (reduced) {
+        reveal();
+        return;
+      }
+      let origin = "50% 60%";
+      try {
+        if (textRef.current && nameRef.current) origin = stemOrigin(textRef.current, nameRef.current);
+      } catch {
+        // Fall back to the centre if the font can't be measured.
+      }
+      setZoom({ origin });
+      playSoon("whoosh");
+    };
+    enterRef.current = enter;
     let finished = false;
 
     // Writes straight to the DOM: no React re-render per frame.
@@ -121,20 +162,8 @@ export default function Preloader() {
       if (p >= 1) {
         finished = true;
         setDone(true);
-        setTimeout(() => {
-          if (reduced) {
-            reveal();
-            return;
-          }
-          let origin = "50% 60%";
-          try {
-            if (textRef.current && nameRef.current)
-              origin = stemOrigin(textRef.current, nameRef.current);
-          } catch {
-            // Fall back to the centre if the font can't be measured.
-          }
-          setZoom({ origin });
-        }, 450);
+        if (hasVisited()) setTimeout(enter, 450);
+        else setChoosing(true);
       }
     };
     const frame = () => {
@@ -150,6 +179,15 @@ export default function Preloader() {
       clearInterval(interval);
     };
   }, []);
+
+  useEffect(() => {
+    if (!choosing) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Enter") enterRef.current();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [choosing]);
 
   return (
     <AnimatePresence>
@@ -219,11 +257,27 @@ export default function Preloader() {
                   <span ref={pctRef}>{"  0"}</span>%
                 </span>
               </div>
-              <p
-                className={`mt-1 transition-opacity duration-300 ${done ? "opacity-100" : "opacity-0"}`}
-              >
-                <span className="text-signal">✓</span> ready. welcome in.
-              </p>
+              <div className="relative mt-4 h-11">
+                <p
+                  className={`absolute inset-x-0 top-0 transition-opacity duration-300 ${done && !choosing ? "opacity-100" : "opacity-0"}`}
+                >
+                  <span className="text-signal">✓</span> ready. welcome in.
+                </p>
+                <div
+                  className={`absolute inset-x-0 top-0 flex items-center gap-5 transition-opacity duration-500 ${choosing ? "opacity-100" : "pointer-events-none opacity-0"}`}
+                >
+                  <button
+                    data-sound="none"
+                    onClick={() => enterRef.current()}
+                    className="key key-signal"
+                    tabIndex={choosing ? 0 : -1}
+                  >
+                    enter
+                    <span className="kbd !bg-black/10 !text-ink">↵</span>
+                  </button>
+                  <span className="text-paper/40">best with sound on</span>
+                </div>
+              </div>
             </motion.div>
           </div>
 

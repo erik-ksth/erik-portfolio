@@ -35,7 +35,7 @@ export const experiencesData = [
   {
     title: "Bachelor's Degree in Computer Science",
     location: "San José State University",
-    date: "2023 - 2025",
+    date: "Sep 2023 - May 2025",
   },
   {
     title: "Front-End Developer & UI/UX Designer",
@@ -50,7 +50,7 @@ export const experiencesData = [
   {
     title: "Associate's Degree for Transfer in Computer Science",
     location: "De Anza College",
-    date: "Jun 2023",
+    date: "Jan 2022 - Jun 2023",
   },
   {
     title: "Co-Founder and Project Leader",

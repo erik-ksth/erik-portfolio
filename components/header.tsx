@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { paletteStore, usePreloaderDone } from "@/lib/store";
 import { useScrollTo } from "./smooth-scroll";
+import SoundToggle from "./sound-toggle";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -32,8 +33,10 @@ export default function Header() {
         <span className="code-label hidden opacity-70 md:inline">/ engineer × designer</span>
       </motion.a>
 
-      <motion.div {...intro} className="fixed right-4 top-4 z-[900] md:right-8 md:top-6">
-        <button onClick={() => paletteStore.set(true)} className="key" aria-haspopup="dialog">
+      <motion.div {...intro} className="fixed right-4 top-4 z-[900] flex gap-2 md:right-8 md:top-6">
+        <SoundToggle />
+        {/* The palette plays its own "open" whoosh, so no click sound here. */}
+        <button onClick={() => paletteStore.set(true)} className="key" aria-haspopup="dialog" data-sound="none">
           menu
           <span className="kbd hidden sm:inline">⌘K</span>
         </button>
