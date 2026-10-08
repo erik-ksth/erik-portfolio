@@ -88,7 +88,7 @@ export const projectsData = [
       "Best use of Groq prize winner at CalHacks 12.0 - An AI-powered conversational data analyst that lets users clean, analyze, and visualize datasets using natural language commands.",
     tags: ["Next.JS", "Python", "Fast API", "Pandas"],
     imageUrl: jadeAIImg,
-    link: "https://devpost.com/software/jadeai",
+    link: "https://jade-ai-landing.vercel.app",
   },
   {
     title: "Trekteria: AI-Powered Camping Planner",
