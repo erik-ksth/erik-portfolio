@@ -3,28 +3,20 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { preloaderStore } from "@/lib/store";
-import { getMusicPref, play, playSoon, setMusicOn } from "@/lib/sound";
+import { getMusicPref, play, setMusicOn } from "@/lib/sound";
 import { useLenis } from "./smooth-scroll";
-import LiquidName, { type LoaderApi } from "./liquid-name";
+import ParticleName, { type IntroApi } from "./particle-name";
 
-const DURATION = 2400;
+// How long the particles take to assemble the name.
+const DURATION = 2200;
 // Never hold the visitor longer than this, even if fonts are slow.
 const MAX_WAIT = 4000;
-const DESKTOP_ZOOM_SCALE = 72;
-// Large compositor scales can disappear or stall on iOS Safari. This is still
-// enough to fly through the letterform without exceeding mobile GPU limits.
-const MOBILE_ZOOM_SCALE = 28;
-
-type Zoom = { origin: string; scale: number };
 
 export default function Preloader() {
   const [visible, setVisible] = useState(true);
-  const [zoom, setZoom] = useState<Zoom | null>(null);
-  const nameRef = useRef<HTMLDivElement>(null);
-  const api = useRef<LoaderApi | null>(null);
+  const api = useRef<IntroApi | null>(null);
   const exitFallback = useRef<number | null>(null);
   const lenis = useLenis();
-  const revealRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     if (!lenis || preloaderStore.get()) return;
@@ -46,7 +38,8 @@ export default function Preloader() {
     let ready = false;
     document.fonts?.ready.then(() => (ready = true));
 
-    const start = performance.now();
+    // The galaxy swirls on its own for a moment before the name starts forming.
+    const start = performance.now() + (reduced ? 0 : 700);
     let raf = 0;
     let revealed = false;
     const reveal = () => {
@@ -61,9 +54,8 @@ export default function Preloader() {
       document.documentElement.classList.remove("is-loading");
       preloaderStore.set(true);
     };
-    revealRef.current = reveal;
 
-    // Fly into the name (or just reveal, for reduced motion).
+    // Warp the particles out (or just reveal, for reduced motion).
     const enter = () => {
       // Music is on unless the visitor turned it off. It starts on their first
       // click (browser rule), then eases in very slowly.
@@ -72,35 +64,26 @@ export default function Preloader() {
         reveal();
         return;
       }
-      let origin = "50% 50%";
-      try {
-        if (api.current && nameRef.current)
-          origin = api.current.origin(nameRef.current);
-      } catch {
-        // Fall back to the centre if the font can't be measured.
-      }
-      const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
-      setZoom({ origin, scale: mobile ? MOBILE_ZOOM_SCALE : DESKTOP_ZOOM_SCALE });
-      playSoon("whoosh");
-      // WebKit can occasionally omit animation completion callbacks when a
-      // transformed SVG layer is promoted. Never let that strand the visitor.
-      exitFallback.current = window.setTimeout(reveal, 1400);
+      // Never let a stalled animation strand the visitor.
+      exitFallback.current = window.setTimeout(reveal, 4000);
+      (api.current?.play() ?? Promise.resolve()).then(reveal, reveal);
     };
     let finished = false;
 
     // Writes straight to the DOM: no React re-render per frame.
     const update = () => {
       if (finished) return;
-      const elapsed = performance.now() - start;
+      const elapsed = Math.max(0, performance.now() - start);
       const t = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
+      const eased = 1 - Math.pow(1 - t, 1.6);
       const p = ready || elapsed > MAX_WAIT ? eased : Math.min(eased, 0.92);
 
       api.current?.update(p);
 
       if (p >= 1) {
         finished = true;
-        setTimeout(enter, 350);
+        // A beat to see the finished name (and play with it) before the warp.
+        setTimeout(enter, reduced ? 0 : 600);
       }
     };
     const frame = () => {
@@ -119,7 +102,7 @@ export default function Preloader() {
     };
   }, []);
 
-  const register = useCallback((a: LoaderApi) => {
+  const register = useCallback((a: IntroApi) => {
     api.current = a;
   }, []);
 
@@ -128,29 +111,11 @@ export default function Preloader() {
       {visible && (
         <motion.div
           key="preloader"
-          className="fixed inset-0 z-[10000] flex h-[100dvh] w-screen flex-col overflow-hidden bg-night text-paper"
-          // As the zoom fills the screen the backdrop turns yellow too, so the
-          // hand-off is always a clean yellow frame, which then dissolves.
-          animate={zoom ? { backgroundColor: "#ffd60a" } : undefined}
+          className="fixed inset-0 z-[10000] h-[100dvh] w-screen overflow-hidden bg-night text-paper"
           exit={{ opacity: 0 }}
-          transition={{
-            backgroundColor: { delay: 0.7, duration: 0.2 },
-            opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-          }}
+          transition={{ opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } }}
         >
-          <div className="flex flex-1 flex-col items-center justify-center px-6">
-            {/* The name fills with yellow as it loads, then we fly into the "H". */}
-            <motion.div
-              ref={nameRef}
-              className="relative w-[min(92vw,900px)] will-change-transform"
-              style={{ transformOrigin: zoom?.origin ?? "50% 50%" }}
-              animate={zoom ? { scale: zoom.scale } : { scale: 1 }}
-              transition={{ duration: 1, ease: [0.7, 0, 0.84, 0] }}
-              onAnimationComplete={() => zoom && revealRef.current()}
-            >
-              <LiquidName register={register} />
-            </motion.div>
-          </div>
+          <ParticleName register={register} />
         </motion.div>
       )}
     </AnimatePresence>
