@@ -7,6 +7,7 @@ import Preloader from "@/components/preloader";
 import Cursor from "@/components/cursor";
 import Header from "@/components/header";
 import CommandPalette from "@/components/command-palette";
+import { email, experiencesData, skillsData, socials } from "@/lib/data";
 import SoundEffects from "@/components/sound-effects";
 
 const display = Outfit({ subsets: ["latin"], variable: "--font-display", weight: ["500", "600", "700", "800"] });
@@ -19,6 +20,30 @@ export const metadata: Metadata = {
     "Erik Hein is a product engineer in San Francisco building AI products and creative, interactive interfaces.",
 };
 
+// Who Erik is, in schema.org terms, for search engines and AI agents.
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Erik Hein",
+  jobTitle: "Product Engineer",
+  description: metadata.description,
+  email: `mailto:${email}`,
+  address: { "@type": "PostalAddress", addressLocality: "San Francisco", addressRegion: "CA", addressCountry: "US" },
+  worksFor: [
+    { "@type": "Organization", name: "Iditor Inc." },
+    { "@type": "Organization", name: "Solariz Studio LLC" },
+  ],
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "San José State University" },
+    { "@type": "CollegeOrUniversity", name: "De Anza College" },
+  ],
+  hasOccupation: experiencesData
+    .filter((e) => !/degree/i.test(e.title))
+    .map((e) => ({ "@type": "Occupation", name: e.title, description: `${e.location}, ${e.date}` })),
+  knowsAbout: skillsData,
+  sameAs: socials.map((s) => s.href),
+};
+
 export const viewport: Viewport = {
   themeColor: "#f4f4f1",
 };
@@ -27,6 +52,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body className="paper-grain font-sans antialiased">
+        <script
+          type="application/ld+json"
+          // Static data from lib/data, not user input.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }}
+        />
         <SmoothScroll>
           <Preloader />
           <Cursor />

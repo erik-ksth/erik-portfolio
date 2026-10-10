@@ -379,6 +379,10 @@ export default function KeysScene({
 
   return (
     <Canvas
+      // Measure the layout size, not the on-screen box: the hero lands from a
+      // CSS scale of 1.12, and measuring mid-scale left the name off-centre
+      // until the next resize or scroll.
+      resize={{ offsetSize: true }}
       // While the loader covers the hero, render once (to compile shaders) and idle.
       frameloop={active ? (play ? "always" : "demand") : "never"}
       dpr={[1, 1.75]}
