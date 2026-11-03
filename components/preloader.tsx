@@ -1,22 +1,48 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { preloaderStore } from "@/lib/store";
 import { getMusicPref, play, setMusicOn } from "@/lib/sound";
 import { useLenis } from "./smooth-scroll";
-import ParticleName, { type IntroApi } from "./particle-name";
 
-// How long the particles take to assemble the name.
-const DURATION = 2200;
-// Never hold the visitor longer than this, even if fonts are slow.
-const MAX_WAIT = 4000;
+const IntroScene = dynamic(() => import("./three/intro-scene"), { ssr: false });
+
+const INTRO_DURATION = 3400;
+const MAX_WAIT = 5500;
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Preloader() {
   const [visible, setVisible] = useState(true);
-  const api = useRef<IntroApi | null>(null);
-  const exitFallback = useRef<number | null>(null);
+  const [reducedMotion, setReducedMotion] = useState<boolean | null>(null);
+  const [sceneReady, setSceneReady] = useState(false);
+  const departure = useRef<number | null>(null);
+  const markSceneReady = useCallback(() => setSceneReady(true), []);
+  const finished = useRef(false);
+  const intro = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
+
+  const enter = useCallback(() => {
+    if (finished.current) return;
+    finished.current = true;
+    departure.current = performance.now();
+
+    if (getMusicPref()) setMusicOn(true, false, { delay: 2.5, fade: 14 });
+    play("land");
+    preloaderStore.set(true);
+    setVisible(false);
+
+    // Move focus out of the departing intro only when the visitor used it.
+    if (document.activeElement === intro.current) {
+      const main = document.querySelector("main");
+      if (main) {
+        main.setAttribute("tabindex", "-1");
+        main.focus({ preventScroll: true });
+        main.addEventListener("blur", () => main.removeAttribute("tabindex"), { once: true });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (!lenis || preloaderStore.get()) return;
@@ -29,93 +55,85 @@ export default function Preloader() {
   useEffect(() => {
     document.documentElement.classList.add("is-loading");
     window.scrollTo(0, 0);
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const duration = reduced ? 500 : DURATION;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setReducedMotion(reduced);
+    // A local review link holds the scene until Escape; production always exits.
+    const preview = process.env.NODE_ENV === "development" && new URLSearchParams(window.location.search).has("intro");
 
-    // Only fonts gate the reveal; images and 3D load in the background.
-    let ready = false;
-    document.fonts?.ready.then(() => (ready = true));
+    // The global deadline also covers a slow or unavailable 3D renderer.
+    const deadline = window.setTimeout(() => {
+      if (!preview) enter();
+    }, reduced ? 500 : MAX_WAIT);
 
-    // The galaxy swirls on its own for a moment before the name starts forming.
-    const start = performance.now() + (reduced ? 0 : 700);
-    let raf = 0;
-    let revealed = false;
-    const reveal = () => {
-      if (revealed) return;
-      revealed = true;
-      if (exitFallback.current !== null) {
-        window.clearTimeout(exitFallback.current);
-        exitFallback.current = null;
-      }
-      play("land");
-      setVisible(false);
-      document.documentElement.classList.remove("is-loading");
-      preloaderStore.set(true);
-    };
-
-    // Warp the particles out (or just reveal, for reduced motion).
-    const enter = () => {
-      // Music is on unless the visitor turned it off. It starts on their first
-      // click (browser rule), then eases in very slowly.
-      if (getMusicPref()) setMusicOn(true, false, { delay: 2.5, fade: 14 });
-      if (reduced) {
-        reveal();
-        return;
-      }
-      // Never let a stalled animation strand the visitor.
-      exitFallback.current = window.setTimeout(reveal, 4000);
-      (api.current?.play() ?? Promise.resolve()).then(reveal, reveal);
-    };
-    let finished = false;
-
-    // Writes straight to the DOM: no React re-render per frame.
-    const update = () => {
-      if (finished) return;
-      const elapsed = Math.max(0, performance.now() - start);
-      const t = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 1.6);
-      const p = ready || elapsed > MAX_WAIT ? eased : Math.min(eased, 0.92);
-
-      api.current?.update(p);
-
-      if (p >= 1) {
-        finished = true;
-        // A beat to see the finished name (and play with it) before the warp.
-        setTimeout(enter, reduced ? 0 : 600);
+    // Keep keyboard navigation inside this brief overlay without stealing
+    // focus on arrival. Escape always takes the visitor straight to the work.
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (finished.current) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        enter();
+      } else if (event.key === "Tab") {
+        event.preventDefault();
+        intro.current?.focus({ preventScroll: true });
       }
     };
-    const frame = () => {
-      update();
-      if (!finished) raf = requestAnimationFrame(frame);
-    };
-    raf = requestAnimationFrame(frame);
-    // rAF pauses in background tabs; a timer keeps the clock honest so the
-    // intro isn't still waiting when someone switches over.
-    const interval = setInterval(update, 250);
+    window.addEventListener("keydown", onKeyDown);
+
     return () => {
-      cancelAnimationFrame(raf);
-      clearInterval(interval);
-      if (exitFallback.current !== null) window.clearTimeout(exitFallback.current);
+      window.clearTimeout(deadline);
+      window.removeEventListener("keydown", onKeyDown);
       document.documentElement.classList.remove("is-loading");
     };
-  }, []);
+  }, [enter]);
 
-  const register = useCallback((a: IntroApi) => {
-    api.current = a;
-  }, []);
+  useEffect(() => {
+    if (reducedMotion === null || (!reducedMotion && !sceneReady)) return;
+    if (process.env.NODE_ENV === "development" && new URLSearchParams(window.location.search).has("intro")) return;
+    let disposed = false;
+    const minimum = window.setTimeout(() => {
+      Promise.resolve(document.fonts?.ready).then(() => {
+        if (!disposed) enter();
+      });
+    }, reducedMotion ? 150 : INTRO_DURATION);
+    return () => {
+      disposed = true;
+      window.clearTimeout(minimum);
+    };
+  }, [enter, reducedMotion, sceneReady]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={() => document.documentElement.classList.remove("is-loading")}>
       {visible && (
         <motion.div
           key="preloader"
-          className="fixed inset-0 z-[10000] h-[100dvh] w-screen overflow-hidden bg-night text-paper"
+          ref={intro}
+          tabIndex={-1}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Erik Hein portfolio intro"
+          className="intro"
+          initial={false}
           exit={{ opacity: 0 }}
-          transition={{ opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } }}
+          transition={{ duration: reducedMotion ? 0.15 : 0.8, delay: reducedMotion ? 0 : 0.15, ease }}
         >
-          <ParticleName register={register} />
+          <div className="intro-stage" aria-hidden="true">
+            {reducedMotion === false && <IntroScene onReady={markSceneReady} departure={departure} />}
+          </div>
+          <motion.div
+            className="intro-title"
+            initial={false}
+            exit={{ opacity: 0, y: reducedMotion ? 0 : -16 }}
+            transition={{ duration: reducedMotion ? 0.1 : 0.35 }}
+          >
+            <span className="intro-title-name">Erik Hein<span className="intro-title-dot">.</span></span>
+          </motion.div>
+
+          <div className="intro-footer">
+            <p className="intro-caption">
+              <span>Product engineer</span>
+              <span className="intro-location">San Francisco, CA</span>
+            </p>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

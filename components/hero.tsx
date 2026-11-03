@@ -22,8 +22,8 @@ export default function Hero() {
     <section ref={ref} id="home" className="relative h-[100svh] min-h-[620px] overflow-hidden">
       <motion.div
         className="absolute inset-0"
-        // Lands from slightly "too close" so the loader's warp carries through.
-        initial={{ opacity: 0, scale: 1.12 }}
+        // The intro's camera pass reveals the keyboard scene as it settles into view.
+        initial={{ opacity: 0, scale: 1.04 }}
         animate={ready ? { opacity: 1, scale: 1 } : undefined}
         transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
         data-cursor={assembled ? "scramble" : "spell it"}

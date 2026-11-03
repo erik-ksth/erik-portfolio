@@ -157,28 +157,63 @@ html.is-loading {
   }
 }
 
-/* Preloader signature: stroke draws in, then fills. Pure CSS so it never waits on JS. */
-.signature-draw {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  fill-opacity: 0;
-  animation: signature-stroke 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards,
-    signature-fill 0.45s ease-out 1.3s forwards;
+/* The opening scene shares the hero's sculptural keycap language. */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--night);
+  color: var(--paper);
 }
-@keyframes signature-stroke {
-  to {
-    stroke-dashoffset: 0;
-  }
+.intro-stage {
+  position: absolute;
+  inset: 0 0 100px;
 }
-@keyframes signature-fill {
-  to {
-    fill-opacity: 1;
-  }
+.intro-title {
+  position: absolute;
+  left: clamp(24px, 4vw, 64px);
+  bottom: 112px;
+  overflow: hidden;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+.intro-title-name {
+  display: block;
+  animation: intro-title-in 1s var(--ease-out) 0.9s both;
+}
+.intro-title-dot { color: var(--signal); }
+.intro-footer {
+  position: absolute;
+  right: clamp(24px, 4vw, 64px);
+  bottom: max(28px, env(safe-area-inset-bottom));
+  left: clamp(24px, 4vw, 64px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.intro-caption { display: flex; flex-direction: column; }
+.intro-location { color: #a7a7a0; }
+@keyframes intro-title-in {
+  from { transform: translateY(110%); }
+  to { transform: translateY(0); }
+}
+@media (max-width: 600px) {
+  .intro-stage { bottom: 210px; }
+  .intro-title { bottom: 128px; font-size: clamp(3rem, 13vw, 4rem); }
+}
+@media (max-height: 480px) and (min-width: 601px) {
+  .intro-title { bottom: 90px; font-size: 2.5rem; }
+  .intro-stage { left: 25%; bottom: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .signature-draw {
-    animation: none;
-    stroke-dashoffset: 0;
-    fill-opacity: 1;
-  }
+  .intro-stage { display: none; }
+  .intro-title-name { animation: none; }
 }
